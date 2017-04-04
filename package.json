@@ -1,0 +1,22 @@
+{
+  "name": "liqen-face",
+  "version": "1.0.0",
+  "description": "Web application for Liqen (a.k.a. the Frontend)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exacs/liqen-face.git"
+  },
+  "contributors": [
+    "Carlos Saito <carlos@saito.style> (http://saito.style)",
+    "Cristian Hernandez <hi@crishernandez.co> (http://crishernandez.co)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/exacs/liqen-face/issues"
+  },
+  "homepage": "https://github.com/exacs/liqen-face#readme"	
+}
