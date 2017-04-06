@@ -19,7 +19,7 @@
             <a class="nav-link" href="/">Cómo funciona</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/">La pregunta del día</a>
+            <a class="nav-link" href="/">Preguntas</a>
           </li>
         </ul>
 
@@ -31,11 +31,14 @@
   </header>
 
   <main>
-    <section style="background: #CCFFCC; padding-top: 3em; padding-bottom: 2em">
+    <div class="container py-4">
+      <h2 class="h4">Preguntas</h2>
+    </div>
+    <section class="question">
       <div class="container">
-        <h2>La pregunta del día</h2>
+        <h3 class="display-4">Migración de talento</h3>
         <div>Describe la situación de la migración de talento en el mundo</div>
-        <div class="text-muted mt-2">
+        <div class="text-muted mt-3">
           <span>7 artículos</span>
         </div>
       </div>
@@ -43,18 +46,54 @@
   </main>
   <main class="container my-4">
     <ul class="list-unstyled">
-      <li style="padding-left: 42px">
+      <li class="answer">
         <a href="http://www.bancomundial.org">
-          <img class="float-left" style="margin-left: -42px" width="32" height="32" src="http://www.worldbank.org/content/dam/wbr/share-logo/sharing-wb-logo-clear.png">
+          <img src="http://www.worldbank.org/content/dam/wbr/share-logo/sharing-wb-logo-clear.png"
+               class="float-left answer__icon"
+               width="32" height="32">
         </a>
         <h3>
-          <a href="http://www.bancomundial.org/es/news/feature/2013/11/06/fuga-cerebros-latinoamerica">Fuga de cerebros: ¿dolor de cabeza para Latinoamérica?</a>
+          <a href="http://www.bancomundial.org/es/news/feature/2013/11/06/fuga-cerebros-latinoamerica">
+            Fuga de cerebros: ¿dolor de cabeza para Latinoamérica?
+          </a>
         </h3>
-        <div></div>
         <div class="text-muted mt-2">
-          <span>Banco mundial</span>
-          <span>·</span>
-          <span>06 de noviembre de 2016</span>
+          <span class="answer__meta">Banco mundial</span>
+          <span class="answer__meta">06 de noviembre de 2016</span>
+        </div>
+      </li>
+
+      <li class="answer">
+        <a href="http://www.gestion.pe">
+          <img src="https://pbs.twimg.com/profile_images/684124029540790275/CCmrH4Qc.jpg"
+               class="float-left answer__icon"
+               width="32" height="32">
+        </a>
+        <h3>
+          <a href="http://gestion.pe/empleo-management/hacia-donde-emigran-talentos-mundo-2173592">
+            ¿Hacia dónde emigran los talentos del mundo?
+          </a>
+        </h3>
+        <div class="text-muted mt-2">
+          <span class="answer__meta">Banco mundial</span>
+          <span class="answer__meta">06 de noviembre de 2016</span>
+        </div>
+      </li>
+
+      <li class="answer">
+        <a href="http://www.revistafal.com">
+          <img src="http://revistafal.com/wp-content/uploads/Imagenes/cropped-avatarDefault-32x32.jpg"
+               class="float-left answer__icon"
+               width="32" height="32">
+        </a>
+        <h3>
+          <a href="http://revistafal.com/la-migracion-calificada-en-mexico/">
+            La migración calificada en México
+          </a>
+        </h3>
+        <div class="text-muted mt-2">
+          <span class="answer__meta">Banco mundial</span>
+          <span class="answer__meta">06 de noviembre de 2016</span>
         </div>
       </li>
     </ul>
