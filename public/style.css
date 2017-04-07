@@ -5,6 +5,13 @@
   border-bottom: #CCC 1px solid;
 }
 
+.figures {
+    padding-top: 3em;
+    padding-bottom: 3em;
+    border-top: #CCC 1px solid;
+    border-bottom: #CCC 1px solid;
+}
+
 .answer {
   margin-top: 2em;
   margin-bottom: 2em;
