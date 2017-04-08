@@ -1,28 +1,25 @@
-/**
- * Script that serves as entry point for the Server
- */
-const express = require('express')
+import express from 'express'
+import path from 'path'
+import http from 'http'
+
 const app = express()
-const path = require('path')
-const http = require('http')
 const PORT = process.env.PORT || 3000
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'))
+  res.sendFile(path.join(process.cwd(), 'index.html'))
 })
 
 app.get('/how', (req, res) => {
-  res.sendFile(path.join(__dirname, 'how.html'))
+  res.sendFile(path.join(process.cwd(), 'how.html'))
 })
 
 app.get('/questions', (req, res) => {
-  res.sendFile(path.join(__dirname, 'questions.html'))
+  res.sendFile(path.join(process.cwd(), 'questions.html'))
 })
 
 app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dashboard.html'))
+  res.sendFile(path.join(process.cwd(), 'dashboard.html'))
 })
-
 
 app.use('/static', express.static('public'))
 
