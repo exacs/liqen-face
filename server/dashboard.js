@@ -1,5 +1,5 @@
 /**
- * Router for "non-dashboard" pages
+ * Router for "dashboard" pages
  */
 import express from 'express'
 import React from 'react'
