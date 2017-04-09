@@ -3,15 +3,16 @@
  */
 import express from 'express'
 import React from 'react'
-import { Switch, Route, StaticRouter } from 'react-router'
+import { StaticRouter } from 'react-router'
+import Root from '../dashboard/Root'
+
 import { renderToString } from 'react-dom/server'
 
-const Index = () => (<div>Hola</div>)
 const router = express.Router()
 
 router.use((req, res, next) => {
   // Check if the user is logged in...
-  const logged = !true
+  const logged = true
 
   if (logged) {
     next()
@@ -25,9 +26,7 @@ router.get('*', (req, res) => {
 
   const html = renderToString(
     <StaticRouter location={req.url} context={context}>
-      <Switch>
-        <Route exact path="/" component={Index} />
-      </Switch>
+      <Root />
     </StaticRouter>
   )
 
