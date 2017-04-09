@@ -2,9 +2,10 @@
   "name": "liqen-face",
   "version": "1.0.0",
   "description": "Web application for Liqen (a.k.a. the Frontend)",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
-    "start:dev": "nodemon server/index.js --exec babel-node --presets es2015,react",
+    "clean": "rimraf lib public/dist",
+    "start:dev": "NODE_ENV=development nodemon server/index.js --ignore dashboard/ --ignore client/ --exec babel-node --presets es2015,react",
     "build": "npm run build:server && npm run build:dashboard && npm run build:client",
     "build:server": "babel server -d lib/server --presets es2015,react",
     "build:dashboard": "babel dashboard -d lib/dashboard --presets es2015,react",
@@ -43,6 +44,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "react-hot-loader": "next",
+    "rimraf": "^2.6.1",
+    "style-loader": "^0.16.1",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }

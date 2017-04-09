@@ -7,6 +7,21 @@ import dashboard from './dashboard'
 const app = express()
 const PORT = process.env.PORT || 3000
 
+if (process.env.NODE_ENV === 'development') {
+  const webpack = require('webpack')
+  const webpackDev = require('webpack-dev-middleware')
+  const webpackHot = require('webpack-hot-middleware')
+  const webpackConfig = require('../webpack.config.dev')
+  const compiler = webpack(webpackConfig)
+  const options = {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
+  }
+
+  app.use(webpackDev(compiler, options))
+  app.use(webpackHot(compiler))
+}
+
 app.set('views', path.join(process.cwd(), 'views'))
 app.set('view engine', 'ejs')
 
