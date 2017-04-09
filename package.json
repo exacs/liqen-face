@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon server/index.js --exec babel-node --presets es2015,react",
-    "build": "npm run build:server && npm run build:client",
-    "build:server": "babel server -d lib --presets es2015,react",
+    "build": "npm run build:server && npm run build:dashboard && npm run build:client",
+    "build:server": "babel server -d lib/server --presets es2015,react",
+    "build:dashboard": "babel dashboard -d lib/dashboard --presets es2015,react",
     "build:client": "webpack -p",
-    "start": "node lib/index.js",
+    "start": "node lib/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
