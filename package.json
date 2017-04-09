@@ -11,7 +11,7 @@
     "build:dashboard": "babel dashboard -d lib/dashboard --presets es2015,react",
     "build:client": "webpack -p",
     "start": "node lib/server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint client server dashboard"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,13 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^3.0.1",
     "nodemon": "^1.11.0",
     "react-hot-loader": "next",
     "rimraf": "^2.6.1",
