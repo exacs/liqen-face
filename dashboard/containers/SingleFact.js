@@ -79,7 +79,8 @@ const Fact = () => (
   <div>
     <header className='single-fact__header'>
       <div className='container'>
-        <h3>{f.title} #{f.id}</h3>
+        <h3>Hechos</h3>
+        <h4>{f.title} #{f.id}</h4>
       </div>
     </header>
     <div className='container'>

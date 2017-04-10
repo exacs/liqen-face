@@ -34,7 +34,7 @@ const Facts = () => (
   <div>
     <header className='single-fact__header'>
       <div className='container'>
-        <h3 className='display-4'>Hechos</h3>
+        <h3>Hechos</h3>
       </div>
     </header>
     <ul className='facts list-unstyled'>
