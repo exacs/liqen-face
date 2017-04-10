@@ -1,7 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
 import Dumb from './components/Dumb'
-import Fact from './containers/Fact'
+import Facts from './containers/Facts'
+import SingleFact from './containers/SingleFact'
 
 const Root = () => (
   <div>
@@ -10,7 +11,8 @@ const Root = () => (
     </nav>
     <Switch>
       <Route exact path="/" component={Dumb} />
-      <Route path='/facts/:id' component={Fact} />
+      <Route exact path='/facts' component={Facts} />
+      <Route path='/facts/:id' component={SingleFact} />
     </Switch>
   </div>
 )
