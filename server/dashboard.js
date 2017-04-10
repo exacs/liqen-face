@@ -5,10 +5,12 @@ import express from 'express'
 import React from 'react'
 import { StaticRouter } from 'react-router'
 import Root from '../dashboard/Root'
-
 import { renderToString } from 'react-dom/server'
+import { createStore } from 'redux'
+import reducer from '../dashboard/reducers/index'
 
 const router = express.Router()
+const store = createStore(reducer, {})
 
 router.use((req, res, next) => {
   // Check if the user is logged in...
@@ -26,7 +28,7 @@ router.get('*', (req, res) => {
 
   const html = renderToString(
     <StaticRouter location={req.url} context={context}>
-      <Root />
+      <Root store={store} />
     </StaticRouter>
   )
 
