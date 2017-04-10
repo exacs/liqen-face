@@ -1,18 +1,38 @@
 import React from 'react'
+import Fact from './../components/Fact'
+
+const fs = [
+  {
+    id: 1,
+    question: {
+      id: 3,
+      title: 'Some question'
+    },
+    annotations: [
+      {
+        id: 1,
+        dimension: 'when',
+        target: {
+          type: 'TextQuoteSelector',
+          prefix: 'aaaa ',
+          exact: 'bbbb',
+          suffix: ' cccc'
+        }
+      }
+    ]
+  }
+]
 
 const Facts = () => (
   <div className='container'>
-    <article className='card'>
-      <div className='card-block'>
-        <header className='card-title small'>Respuesta a <a href="#">¿Quién es el mejor piloto de fórmula 1?</a></header>
-        <ul className='list-unstyled'>
-          <li>
-            <span className="font-weight-bold">WHEN</span>
-            <mark className="font-family-serif font-italic">1996-1997</mark>
-          </li>
-        </ul>
-      </div>
-    </article>
+    {
+      fs.map(fact => (
+        <Fact
+          key={fact.id}
+          question={fact.question}
+          annotations={fact.annotations} />
+      ))
+    }
   </div>
 )
 
