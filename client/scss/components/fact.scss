@@ -1,10 +1,22 @@
-.fact__header {
-  background: #dfd;
-  padding: 2rem 0;
+.fact {
+  padding: 1em 0;
+  border-bottom: #ccc 1px solid;
 }
 
-.fact__question {
-  padding: 1rem 0;
-  font-size: 0.8rem;
-  color: #999;
+.fact__container {
+  display: flex;
+}
+
+.fact__id {
+  width: 3em;
+  text-align: center;
+  flex: 0 1 auto;
+}
+
+.fact__title {
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 1;
+  font-family: Georgia;
+  font-style: italic;
 }

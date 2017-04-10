@@ -16,6 +16,7 @@ const q1 = {
 
 const f = {
   id: 2,
+  title: 'El número de inmigrantes cualificados casi se duplicó en la última década',
   question: q1,
   annotations: [
     {
@@ -76,13 +77,13 @@ const f = {
 
 const Fact = () => (
   <div>
-    <header className='fact__header'>
+    <header className='single-fact__header'>
       <div className='container'>
-        <h3 className='display-4'>hecho #{f.id}</h3>
+        <h3>{f.title} #{f.id}</h3>
       </div>
     </header>
     <div className='container'>
-      <div className='fact__question'>
+      <div className='single-fact__question'>
         <span>Este hecho responde a la pregunta: </span>
         <a href={f.question.id}>{f.question.title}</a>
       </div>
