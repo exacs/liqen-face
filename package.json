@@ -4,6 +4,7 @@
   "description": "Web application for Liqen (a.k.a. the Frontend)",
   "main": "server/index.js",
   "scripts": {
+    "postinstall": "npm run build",
     "clean": "rimraf lib public/dist",
     "start:dev": "NODE_ENV=development nodemon server/index.js --ignore dashboard/ --ignore client/ --exec babel-node --presets es2015,react",
     "build": "npm run build:server && npm run build:dashboard && npm run build:client",
