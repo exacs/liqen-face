@@ -1,12 +1,19 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
-
-const Index = () => (<div>Hola</div>)
+import Facts from './containers/Facts'
 
 const Root = () => (
-  <Switch>
-    <Route exact path="/" component={Index} />
-  </Switch>
+  <div>
+    <nav className='navbar navbar-inverse bg-inverse'>
+      <a className='navbar-brand' href="/">Liqen Dashboard</a>
+    </nav>
+    <ol className='breadcrumb'>
+      <li className='breadcrumb-item'>Facts</li>
+    </ol>
+    <Switch>
+      <Route exact path="/" component={Facts} />
+    </Switch>
+  </div>
 )
 
 export default Root
