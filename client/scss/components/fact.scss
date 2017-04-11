@@ -1,0 +1,22 @@
+.fact {
+  padding: 1em 0;
+  border-bottom: #ccc 1px solid;
+}
+
+.fact__container {
+  display: flex;
+}
+
+.fact__id {
+  width: 3em;
+  text-align: center;
+  flex: 0 1 auto;
+}
+
+.fact__title {
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 1;
+  font-family: Georgia;
+  font-style: italic;
+}
