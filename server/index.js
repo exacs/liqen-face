@@ -25,14 +25,7 @@ app.set('views', path.join(process.cwd(), 'views'))
 app.set('view engine', 'ejs')
 
 app.use('/static', express.static('public'))
-
-// Use non-dashboard router
 app.use('/', router)
-
-// Use non-dashboard router only for "/"
-app.get('/', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'index.html'))
-})
 
 const server = http.Server(app)
 
