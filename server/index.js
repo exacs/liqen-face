@@ -5,6 +5,7 @@ import router from './router'
 
 const app = express()
 const PORT = process.env.PORT || 3000
+const server = http.Server(app)
 
 if (process.env.NODE_ENV === 'development') {
   const webpack = require('webpack')
@@ -26,8 +27,6 @@ app.set('view engine', 'ejs')
 
 app.use('/static', express.static('public'))
 app.use('/', router)
-
-const server = http.Server(app)
 
 server.listen(PORT, function () {
   console.log('Listening to port ', PORT)
