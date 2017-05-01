@@ -2,18 +2,45 @@
  * Router for "non-dashboard" pages
  */
 import express from 'express'
-import path from 'path'
 
 const router = express.Router()
+const loggedIn = false
 
-router.get('/how', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'how.html'))
+router.get('/', (req, res, next) => {
+  if (loggedIn) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
 })
 
-router.get('/questions', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'questions.html'))
+router.post('/login', (req, res) => {
+  const success = true
+  // Call core
+  // ...
+  if (success) {
+    // Set cookies
+    // Redirect to '/'
+    res.redirect('/')
+  } else {
+    res.send('Login page with errors')
+  }
 })
 
-router.get('*', (req, res, next) => next())
+router.get('/login', (req, res) => {
+  if (loggedIn) {
+    res.redirect('/')
+  } else {
+    res.send('Login page')
+  }
+})
+
+router.get('*', (req, res, next) => {
+  if (loggedIn) {
+    res.send('This is REACT!!!')
+  } else {
+    res.send('404 Not found')
+  }
+})
 
 export default router
