@@ -2,37 +2,41 @@
  * Router for "non-dashboard" pages
  */
 import express from 'express'
+import bodyParser from 'body-parser'
+import { checkSession, login } from './auth'
 
 const router = express.Router()
 const loggedIn = false
+const urlencodedParser = bodyParser.urlencoded({ extend: false })
 
 router.get('/', (req, res, next) => {
-  if (loggedIn) {
-    next()
-  } else {
-    res.redirect('/login')
-  }
+  checkSession(req, res)
+    .then(user => {
+      req.currentUser = user
+      next()
+    })
+    .catch(err => {
+      res.send(`NO ECHTA LOGEADO CHEÑÓ - ${err.message}`)
+    })
 })
 
-router.post('/login', (req, res) => {
-  const success = true
-  // Call core
-  // ...
-  if (success) {
-    // Set cookies
-    // Redirect to '/'
-    res.redirect('/')
-  } else {
-    res.send('Login page with errors')
+router.post('/login', urlencodedParser, (req, res) => {
+  if (!req.body) {
+    return res.send('LOGIN FAIL')
   }
+
+  const { email, password } = req.body
+  return login(email, password)
+    .then(user => {
+      res.send('I am IN')
+    })
+    .catch(() => {
+      res.send('I am NOT IN')
+    })
 })
 
 router.get('/login', (req, res) => {
-  if (loggedIn) {
-    res.redirect('/')
-  } else {
-    res.send('Login page')
-  }
+  res.send('Login page')
 })
 
 router.get('*', (req, res, next) => {
