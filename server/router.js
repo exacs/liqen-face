@@ -7,7 +7,7 @@ import { checkSession, login } from './auth'
 
 const router = express.Router()
 const loggedIn = false
-const urlencodedParser = bodyParser.urlencoded({ extend: false })
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/', (req, res, next) => {
   checkSession(req, res)
@@ -20,19 +20,16 @@ router.get('/', (req, res, next) => {
     })
 })
 
-router.post('/login', urlencodedParser, (req, res) => {
+router.post('/login', urlencodedParser, login, (req, res) => {
   if (!req.body) {
     return res.send('LOGIN FAIL')
   }
 
-  const { email, password } = req.body
-  return login(email, password)
-    .then(user => {
-      res.send('I am IN')
-    })
-    .catch(() => {
-      res.send('I am NOT IN')
-    })
+  if (req.user) {
+    res.send('I am IN')
+  } else {
+    res.send('I am NOT IN')
+  }
 })
 
 router.get('/login', (req, res) => {

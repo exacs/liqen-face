@@ -17,6 +17,10 @@ export function login (req, res, next) {
       cookies.set('unsigned', 'access_token', session.access_token)
       cookies.set('unsigned', 'user_id', session.user.id)
 
-      return session.user
+      req.user = session.user
+      next()
+    })
+    .catch(() => {
+      next()
     })
 }

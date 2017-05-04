@@ -30,7 +30,7 @@ app.set('view engine', 'ejs')
 app.use('/static', express.static('public'))
 
 if (process.env.NODE_ENV === 'development') {
-  const localCore = require('./local-liqen')
+  const localCore = require('./local-liqen').default
   app.use(client(localCore))
 } else {
   app.use(client(core))
