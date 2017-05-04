@@ -1,7 +1,9 @@
 import express from 'express'
 import path from 'path'
 import http from 'http'
+import core from 'liqen'
 import router from './router'
+import client from './client-middleware'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -26,6 +28,14 @@ app.set('views', path.join(process.cwd(), 'views'))
 app.set('view engine', 'ejs')
 
 app.use('/static', express.static('public'))
+
+if (process.env.NODE_ENV === 'development') {
+  const localCore = require('./local-liqen').default
+  app.use(client(localCore))
+} else {
+  app.use(client(core))
+}
+
 app.use('/', router)
 
 server.listen(PORT, function () {
