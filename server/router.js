@@ -15,8 +15,8 @@ router.get('/', (req, res, next) => {
       req.currentUser = user
       next()
     })
-    .catch(err => {
-      res.send(`NO ECHTA LOGEADO CHEÑÓ - ${err.message}`)
+    .catch(() => {
+      res.render('index')
     })
 })
 
@@ -28,12 +28,12 @@ router.post('/login', urlencodedParser, login, (req, res) => {
   if (req.user) {
     res.send('I am IN')
   } else {
-    res.send('I am NOT IN')
+    res.render('index')
   }
 })
 
 router.get('/login', (req, res) => {
-  res.send('Login page')
+  res.render('index')
 })
 
 router.get('*', (req, res, next) => {
