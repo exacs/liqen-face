@@ -3,7 +3,7 @@
  */
 import express from 'express'
 import bodyParser from 'body-parser'
-import { checkSession, login } from './auth'
+import { checkSession, login } from './middlewares'
 
 const router = express.Router()
 const loggedIn = false
