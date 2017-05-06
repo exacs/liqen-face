@@ -9,13 +9,19 @@ export function checkSession (req, res) {
 }
 
 export function login (req, res, next) {
+  if (!req.body) return res.sendStatus(400)
+
   const cookies = new Cookies(req, res)
 
   return req
-    .core.sessions.create({})
+    .core.sessions.create({
+      email: req.body.email,
+      password: req.body.password
+    })
     .then(session => {
-      cookies.set('unsigned', 'access_token', session.access_token)
-      cookies.set('unsigned', 'user_id', session.user.id)
+      cookies
+        .set('access_token', session.access_token)
+        .set('user_id', session.user.id)
 
       req.user = session.user
       next()
