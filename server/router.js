@@ -32,6 +32,16 @@ router.get('/login', (req, res) => {
   res.render('index')
 })
 
+// Temporal backend.
+//
+// In a future, replace this with a GraphQL endpoint
+router.get('/backend', (req, res) => {
+  req
+    .core.articles.index()
+    .then(articles => req.json(articles))
+    .catch(err => req.json(err))
+})
+
 router.get('*', checkSession, (req, res, next) => {
   if (req.currentUser) {
     res.render('dashboard')
