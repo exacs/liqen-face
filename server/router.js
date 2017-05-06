@@ -6,7 +6,6 @@ import bodyParser from 'body-parser'
 import { checkSession, login } from './middlewares'
 
 const router = express.Router()
-const loggedIn = false
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/', checkSession, (req, res, next) => {
@@ -33,8 +32,8 @@ router.get('/login', (req, res) => {
   res.render('index')
 })
 
-router.get('*', (req, res, next) => {
-  if (loggedIn) {
+router.get('*', checkSession, (req, res, next) => {
+  if (req.currentUser) {
     res.send('This is REACT!!!')
   } else {
     res.send('404 Not found')
