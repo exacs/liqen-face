@@ -34,7 +34,7 @@ router.get('/login', (req, res) => {
 
 router.get('*', checkSession, (req, res, next) => {
   if (req.currentUser) {
-    res.send('This is REACT!!!')
+    res.render('dashboard')
   } else {
     res.send('404 Not found')
   }
