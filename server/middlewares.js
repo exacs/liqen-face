@@ -1,11 +1,19 @@
 import Cookies from 'cookies'
 
-export function checkSession (req, res) {
+export function checkSession (req, res, next) {
   const cookies = new Cookies(req, res)
   const userId = cookies.get('user_id')
 
   return req
     .core.users.show(userId)
+    .then(user => {
+      req.currentUser = user
+      next()
+    })
+    .catch(() => {
+      req.currentUser = null
+      next()
+    })
 }
 
 export function login (req, res, next) {

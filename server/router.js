@@ -9,15 +9,12 @@ const router = express.Router()
 const loggedIn = false
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-router.get('/', (req, res, next) => {
-  checkSession(req, res)
-    .then(user => {
-      req.currentUser = user
-      next()
-    })
-    .catch(() => {
-      res.render('index')
-    })
+router.get('/', checkSession, (req, res, next) => {
+  if (req.currentUser) {
+    next()
+  } else {
+    res.render('index')
+  }
 })
 
 router.post('/login', urlencodedParser, login, (req, res) => {
