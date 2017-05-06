@@ -3,7 +3,7 @@ import path from 'path'
 import http from 'http'
 import core from 'liqen'
 import router from './router'
-import setLiqenCore from './middlewares'
+import { setLiqenCore } from './middlewares'
 
 const app = express()
 const PORT = process.env.PORT || 3000
