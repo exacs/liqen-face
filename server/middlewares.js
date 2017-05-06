@@ -4,6 +4,11 @@ export function checkSession (req, res, next) {
   const cookies = new Cookies(req, res)
   const userId = cookies.get('user_id')
 
+  if (!userId) {
+    req.currentUser = null
+    return next()
+  }
+
   return req
     .core.users.show(userId)
     .then(user => {
