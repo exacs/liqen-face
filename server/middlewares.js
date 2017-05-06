@@ -31,7 +31,7 @@ export function login (req, res, next) {
     })
 }
 
-export const client = core => (req, res, next) => {
+export const setLiqenCore = core => (req, res, next) => {
   const cookies = new Cookies(req, res)
   const accessToken = cookies.get('access_token')
 
