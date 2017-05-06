@@ -30,6 +30,27 @@ const localLiqen = token => ({
         return Promise.reject(new Error('not authenticated'))
       }
     }
+  },
+
+  articles: {
+    index () {
+      return [
+        {
+          id: 2,
+          title: 'Fuga de cerebros: ¿dolor de cabeza para Latinoamérica?',
+          source: {
+            uri: 'http://www.bancomundial.org/es/news/feature/2013/11/06/fuga-cerebros-latinoamerica'
+          }
+        },
+        {
+          id: 3,
+          title: '¿Hacia dónde emigran los talentos del mundo?',
+          source: {
+            uri: 'http://gestion.pe/empleo-management/hacia-donde-emigran-talentos-mundo-2173592'
+          }
+        }
+      ]
+    }
   }
 })
 
