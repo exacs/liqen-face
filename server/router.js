@@ -32,9 +32,19 @@ router.get('/login', (req, res) => {
   res.render('index')
 })
 
+// Temporal backend.
+//
+// In a future, replace this with a GraphQL endpoint
+router.get('/backend', (req, res) => {
+  req
+    .core.articles.index()
+    .then(articles => res.json(articles))
+    .catch(err => res.json(err))
+})
+
 router.get('*', checkSession, (req, res, next) => {
   if (req.currentUser) {
-    res.send('This is REACT!!!')
+    res.render('dashboard')
   } else {
     res.send('404 Not found')
   }
