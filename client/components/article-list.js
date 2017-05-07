@@ -11,7 +11,9 @@ class ArticleList extends React.Component {
         {
           id: 0,
           title: 'Example article',
-          uri: 'http://localhost'
+          source: {
+            uri: 'http://localhost'
+          }
         }
       ]
     }
@@ -24,10 +26,10 @@ class ArticleList extends React.Component {
   }
 
   render () {
-    const articles = this.state.articles.map(({id, title, uri}) =>
+    const articles = this.state.articles.map(({id, title, source}) =>
       <Article key={id}
         title={title}
-        uri={uri} />
+        link={source.uri} />
     )
 
     return (
