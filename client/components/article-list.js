@@ -1,6 +1,7 @@
 import React from 'react'
 import Question from './question'
 import Article from './article'
+import fetch from 'isomorphic-fetch'
 
 class ArticleList extends React.Component {
   constructor (props) {
@@ -8,13 +9,20 @@ class ArticleList extends React.Component {
     this.state = {
       articles: [
         {
-          id: 1,
+          id: 0,
           title: 'Example article',
           uri: 'http://localhost'
         }
       ]
     }
   }
+
+  componentWillMount () {
+    fetch('/backend')
+      .then(response => response.json())
+      .then(articles => this.setState({articles}))
+  }
+
   render () {
     const articles = this.state.articles.map(({id, title, uri}) =>
       <Article key={id}
