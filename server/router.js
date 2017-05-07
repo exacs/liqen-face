@@ -38,8 +38,8 @@ router.get('/login', (req, res) => {
 router.get('/backend', (req, res) => {
   req
     .core.articles.index()
-    .then(articles => req.json(articles))
-    .catch(err => req.json(err))
+    .then(articles => res.json(articles))
+    .catch(err => res.json(err))
 })
 
 router.get('*', checkSession, (req, res, next) => {

@@ -34,7 +34,7 @@ const localLiqen = token => ({
 
   articles: {
     index () {
-      return [
+      return Promise.resolve([
         {
           id: 2,
           title: 'Fuga de cerebros: ¿dolor de cabeza para Latinoamérica?',
@@ -49,7 +49,7 @@ const localLiqen = token => ({
             uri: 'http://gestion.pe/empleo-management/hacia-donde-emigran-talentos-mundo-2173592'
           }
         }
-      ]
+      ])
     }
   }
 })
