@@ -5,8 +5,7 @@ export function checkSession (req, res, next) {
   const userId = cookies.get('user_id')
 
   if (!userId) {
-    req.currentUser = null
-    return next()
+    return res.redirect('/login')
   }
 
   return req
@@ -15,14 +14,13 @@ export function checkSession (req, res, next) {
       req.currentUser = user
       next()
     })
-    .catch(() => {
-      req.currentUser = null
-      next()
-    })
+    .catch(() => res.redirect('/login'))
 }
 
 export function login (req, res, next) {
-  if (!req.body) return res.sendStatus(400)
+  if (!req.body) {
+    return res.render('index')
+  }
 
   const cookies = new Cookies(req, res)
 
@@ -39,9 +37,7 @@ export function login (req, res, next) {
       req.user = session.user
       next()
     })
-    .catch(() => {
-      next()
-    })
+    .catch(() => res.render('index'))
 }
 
 export const setLiqenCore = core => (req, res, next) => {
