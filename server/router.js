@@ -9,23 +9,11 @@ const router = express.Router()
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/', checkSession, (req, res, next) => {
-  if (req.currentUser) {
-    next()
-  } else {
-    res.render('index')
-  }
+  res.render('dashboard')
 })
 
 router.post('/login', urlencodedParser, login, (req, res) => {
-  if (!req.body) {
-    return res.send('LOGIN FAIL')
-  }
-
-  if (req.user) {
-    res.send('I am IN')
-  } else {
-    res.render('index')
-  }
+  res.redirect('/')
 })
 
 router.get('/login', (req, res) => {
@@ -42,12 +30,8 @@ router.get('/backend', (req, res) => {
     .catch(err => res.json(err))
 })
 
-router.get('*', checkSession, (req, res, next) => {
-  if (req.currentUser) {
-    res.render('dashboard')
-  } else {
-    res.send('404 Not found')
-  }
+router.get('*', (req, res, next) => {
+  res.send('404 Not found')
 })
 
 export default router
