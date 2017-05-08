@@ -1,3 +1,58 @@
-body {
-  background: #000;
+a {
+  color: #3a5665;
+}
+
+a:hover {
+  color: #3a5665;
+}
+
+mark {
+  padding-left: 0;
+  padding-right: .1em;
+}
+
+.btn-primary {
+  color: #3a5665;
+  background-color: #78fd07;
+  border-color: #78fd07;
+}
+
+.btn-primary:hover {
+  color: #3a5665;
+  background-color: #78fd07;
+  border-color: #78fd07;
+}
+
+.navbar .navbar-brand {
+  font-weight: bold;
+}
+
+.navbar-light .navbar-brand {
+  color: #3a5665;
+}
+.navbar-light .navbar-brand:hover {
+  color: #3a5665;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #78fd07;
+}
+.navbar-inverse .navbar-brand:hover {
+  color: #78fd07;
+}
+
+.jumbotron {
+  border-radius: 0;
+}
+
+.card {
+  margin-bottom: 3em;
+}
+
+.bg-primary {
+  background-color: #3a5665 !important;
+}
+
+.bg-primary a {
+  color: #78fd07;
 }
