@@ -12,6 +12,10 @@ router.get('/', checkSession, (req, res, next) => {
   res.render('dashboard')
 })
 
+router.get('/team', (req, res, next) => {
+  res.render('team')
+})
+
 router.post('/login', urlencodedParser, login, (req, res) => {
   res.redirect('/')
 })
