@@ -17,7 +17,7 @@ const Article = ({ link, title, id }) => (
         </a>
       </h4>
       <p className='card-text'>
-        <small className='text-muted'>06 de noviembre de 2016</small>
+        <small className='text-muted'></small>
       </p>
     </div>
   </div>
