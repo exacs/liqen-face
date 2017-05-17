@@ -12,8 +12,8 @@ router.get('/', checkSession, (req, res, next) => {
   res.render('dashboard')
 })
 
-router.get('/team', (req, res, next) => {
-  res.render('team')
+router.get('/about', (req, res, next) => {
+  res.render('about')
 })
 
 router.post('/login', urlencodedParser, login, (req, res) => {
