@@ -1,9 +1,14 @@
 import React from 'react'
 
-const Article = ({ link, title }) => (
+function getColorFromId(id) {
+  const hue = (id * 97) % 360
+  return `hsl(${hue}, 32%, 68%)`
+}
+
+const Article = ({ link, title, id }) => (
   <div className='card'>
-    <img className='card-img-top'
-      src='http://www.bancomundial.org/content/dam/Worldbank/Feature%20Story/lac/pe-university-education-pucp-400x264.jpg'
+    <div className='card-img-top'
+      style={{height: '5em', background: getColorFromId(id)}}
       alt='Card image cap' />
     <div className='card-block'>
       <h4 className='card-title'>

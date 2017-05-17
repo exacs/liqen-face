@@ -28,6 +28,7 @@ class ArticleList extends React.Component {
   render () {
     const articles = this.state.articles.map(({id, title, source}) =>
       <Article key={id}
+        id={id}
         title={title}
         link={source.uri} />
     )
