@@ -6,9 +6,9 @@
   "scripts": {
     "postinstall": "npm run build",
     "clean": "rimraf lib public/dist",
-    "start:dev": "NODE_ENV=development nodemon server/index.js --ignore dashboard/ --ignore client/ --exec babel-node --presets es2015,react",
+    "start:dev": "NODE_ENV=development nodemon server/index.js --ignore dashboard/ --ignore client/ --exec babel-node --presets env,react",
     "build": "npm run build:server && npm run build:client",
-    "build:server": "babel server -d lib/server --presets es2015,react",
+    "build:server": "babel server -d lib/server --presets env,react",
     "build:dashboard": "babel dashboard -d lib/dashboard --presets es2015,react",
     "build:client": "webpack -p",
     "start": "node lib/server/index.js",
@@ -51,6 +51,7 @@
     "webpack": "^2.3.3"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.5.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.0",
     "eslint-plugin-import": "^2.2.0",
