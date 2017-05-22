@@ -4,6 +4,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { checkSession, login } from './middlewares'
+import { downloadArticle } from 'liqen-scrapper'
 
 const router = express.Router()
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -37,6 +38,8 @@ router.get('/annotate', checkSession, async function (req, res, next) {
   // Take the article and parse it
   async function getArticle () {
     const article = await req.core.articles.show(articleId)
+    const content = await downloadArticle(article.source.uri)
+    console.log(content)
     return article
   }
 
