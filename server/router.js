@@ -12,6 +12,45 @@ router.get('/', checkSession, (req, res, next) => {
   res.render('dashboard')
 })
 
+router.get('/annotate', checkSession, async function (req, res, next) {
+  if (!req.query.article || !req.query.question) {
+    return res.redirect('/')
+  }
+
+  const articleId = req.query.article
+  const questionId = req.query.question
+
+  // Take the question and its tags
+  async function getQuestionAndTags () {
+    const question = await req.core.questions.show(questionId)
+    const answer = question.answer.map(async (answer) => {
+      const tag = await req.core.tags.show(answer.tag)
+      return {
+        tag,
+        required: answer.required
+      }
+    })
+    question.answer = await Promise.all(answer)
+    return question
+  }
+
+  // Take the article and parse it
+  async function getArticle () {
+    const article = await req.core.articles.show(articleId)
+    return article
+  }
+
+  // Paralelize
+  const [question, article] = await Promise.all([
+    getQuestionAndTags(),
+    getArticle()
+  ])
+
+  console.log(article)
+  console.log(question)
+  return res.render('annotate', {question, article})
+})
+
 router.get('/about', (req, res, next) => {
   res.render('about')
 })
