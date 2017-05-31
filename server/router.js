@@ -39,7 +39,7 @@ router.get('/annotate', checkSession, async function (req, res, next) {
   async function getArticle () {
     const article = await req.core.articles.show(articleId)
     const content = await downloadArticle(article.source.uri)
-    console.log(content)
+    article.content = content
     return article
   }
 
@@ -49,7 +49,7 @@ router.get('/annotate', checkSession, async function (req, res, next) {
     getArticle()
   ])
 
-  console.log(article)
+  console.log(article.content.body.html)
   console.log(question)
   return res.render('annotate', {question, article})
 })

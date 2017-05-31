@@ -18,11 +18,13 @@
   <div class="container mt-4">
     <div class="row">
       <aside class="hidden-md-down col-lg-4 flex-last">
-        <h2>Side-panel
       </aside>
       <div class="col-lg-8 col-xl-7" id="root">
+        <header>
+          <h1><%= article.title %></h1>
+        </header>
         <main>
-          Main article
+          <%- article.content.body.html %>
         </main>
       </div>
     </div>
