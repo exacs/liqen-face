@@ -9,6 +9,7 @@ module.exports = {
 
   entry: {
     dashboard: ['webpack-hot-middleware/client', './dashboard'],
+    annotate: ['webpack-hot-middleware/client', './annotate']
   },
 
   output: {

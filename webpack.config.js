@@ -7,6 +7,7 @@ module.exports = {
 
   entry: {
     dashboard: './dashboard',
+    annotate: './annotate'
   },
 
   output: {
