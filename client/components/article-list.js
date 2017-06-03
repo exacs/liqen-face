@@ -1,7 +1,7 @@
 import React from 'react'
 import Question from './question'
 import Article from './article'
-import fetch from 'isomorphic-fetch'
+import liqen from 'liqen'
 
 class ArticleList extends React.Component {
   constructor (props) {
@@ -20,9 +20,9 @@ class ArticleList extends React.Component {
   }
 
   componentWillMount () {
-    fetch('/backend')
-      .then(response => response.json())
-      .then(articles => this.setState({articles}))
+    liqen('', { apiURI: 'http://localhost:4000' }).articles.index()
+    //      .then(response => response.json())
+      .then(articles => {console.log(articles); this.setState({articles})})
   }
 
   render () {

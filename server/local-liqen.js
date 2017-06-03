@@ -85,7 +85,7 @@ const localLiqen = token => ({
     show (id) {
       return Promise.resolve({
         id,
-        title: ['Place of origin', 'Reason', 'Destination'][id]
+        title: ['Place of origin', 'Reason', 'Destination'][id-1]
       })
     }
   }
