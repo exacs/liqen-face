@@ -54,15 +54,15 @@ const localLiqen = token => ({
 
     show () {
       return Promise.resolve({
-        "title": "Fuga de cerebros: ¿dolor de cabeza para Latinoamérica?",
-        "source": {
-          "uri": "http://www.bancomundial.org/es/news/feature/2013/11/06/fuga-cerebros-latinoamerica",
-          "target": {
-            "value": "/html/body/div[6]/div[1]/div[2]/div[1]/div[1]/div/div/div/div[2]/div[1]/div/div/div/div/div[3]/section/div",
-            "type": "XPathSelector"
+        'title': 'Fuga de cerebros: ¿dolor de cabeza para Latinoamérica?',
+        'source': {
+          'uri': 'http://www.bancomundial.org/es/news/feature/2013/11/06/fuga-cerebros-latinoamerica',
+          'target': {
+            'value': '/html/body/div[6]/div[1]/div[2]/div[1]/div[1]/div/div/div/div[2]/div[1]/div/div/div/div/div[3]/section/div',
+            'type': 'XPathSelector'
           }
         },
-        "id": 2
+        'id': 2
       })
     }
   },
@@ -70,12 +70,12 @@ const localLiqen = token => ({
   questions: {
     show () {
       return Promise.resolve({
-        "title": "Describe the migration flow of the highly qualified people",
-        "id": 1,
-        "answer": [
-          { "tag": 1, "required": true },
-          { "tag": 2, "required": true },
-          { "tag": 3, "required": true }
+        'title': 'Describe the migration flow of the highly qualified people',
+        'id': 1,
+        'answer': [
+          { 'tag': 1, 'required': true },
+          { 'tag': 2, 'required': true },
+          { 'tag': 3, 'required': true }
         ]
       })
     }
@@ -85,7 +85,7 @@ const localLiqen = token => ({
     show (id) {
       return Promise.resolve({
         id,
-        title: ['Place of origin', 'Reason', 'Destination'][id-1]
+        title: ['Place of origin', 'Reason', 'Destination'][id - 1]
       })
     }
   }

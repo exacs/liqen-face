@@ -49,8 +49,6 @@ router.get('/annotate', checkSession, async function (req, res, next) {
     getArticle()
   ])
 
-  console.log(article.content.body.html)
-  console.log(question)
   return res.render('annotate', {question, article})
 })
 

@@ -4,7 +4,6 @@ import Annotator from './components/annotator'
 
 const question = JSON.parse(window.QUESTION)
 const tags = question.answer.map(a => a.tag)
-console.log(tags)
 
 function convertObjectToReact (obj) {
   if (typeof obj === 'string') {
@@ -19,7 +18,6 @@ function convertObjectToReact (obj) {
     }
   }
 }
-
 
 const encapsulated = JSON.parse(window.BODY_JSON).children.map(child => (
   <Annotator

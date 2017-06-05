@@ -21,8 +21,9 @@ class ArticleList extends React.Component {
 
   componentWillMount () {
     liqen('', { apiURI: 'http://localhost:4000' }).articles.index()
-    //      .then(response => response.json())
-      .then(articles => {console.log(articles); this.setState({articles})})
+      .then(articles => {
+        console.log(articles); this.setState({articles})
+      })
   }
 
   render () {
