@@ -1,34 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Annotator from './components/annotator'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider } from 'react-redux'
 
-const question = JSON.parse(window.QUESTION)
-const tags = question.answer.map(a => a.tag)
+import reducer from './reducers/index'
+import callAPI from './middlewares/call-api'
+import Annotate from './containers/Annotate'
 
-function convertObjectToReact (obj) {
-  if (typeof obj === 'string') {
-    return obj
-  } else {
-    const children = obj.children.map(convertObjectToReact)
-
-    if (children.length === 1) {
-      return React.createElement(obj.name, obj.attrs, children[0])
-    } else {
-      return React.createElement(obj.name, obj.attrs, children)
-    }
-  }
-}
-
-const encapsulated = JSON.parse(window.BODY_JSON).children.map(child => (
-  <Annotator
-    annotations={[]}
-    tags={tags}
-  >
-    {convertObjectToReact(child)}
-  </Annotator>
-))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(reducer, [], composeEnhancers(applyMiddleware(callAPI)))
 
 ReactDOM.render(
-  <div>{encapsulated}</div>,
-  document.getElementById('article-body')
+  <Provider store={store}>
+    <Annotate />
+  </Provider>,
+  document.getElementById('react-root')
 )

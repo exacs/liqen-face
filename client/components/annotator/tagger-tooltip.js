@@ -64,7 +64,7 @@ const TaggerTooltip = ({ list, selected, onSelect, onUnselect, position }) => (
                      outline: 'none',
                      textAlign: 'left'
                    }}
-                   onClick={() => onSelect(tag.id)}
+                   onClick={() => onSelect(tag)}
                  >
                    {tag.title}
                  </button>

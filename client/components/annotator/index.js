@@ -47,11 +47,11 @@ export default class Annotator extends React.Component {
     })
   }
 
-  handleSelectTag (tagId) {
+  handleSelectTag (tag) {
     if (this.state.newAnnotation.target) {
       this.props.onCreateAnnotation({
         target: this.state.newAnnotation.target,
-        tag: tagId
+        tag
       })
 
       document.getSelection().removeAllRanges()
