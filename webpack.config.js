@@ -18,18 +18,21 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        options: {
+          presets: ['es2015', 'react']
+        }
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
         loader: ExtractTextPlugin.extract({
-            use: [
-              'css-loader',
-              'sass-loader'
-            ]
+          use: [
+            'css-loader',
+            'sass-loader'
+          ]
         })
       }
     ]
