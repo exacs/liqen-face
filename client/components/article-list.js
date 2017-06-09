@@ -20,7 +20,7 @@ class ArticleList extends React.Component {
   }
 
   componentWillMount () {
-    liqen('', { apiURI: 'http://localhost:4000' }).articles.index()
+    liqen().articles.index()
       .then(articles => {
         console.log(articles); this.setState({articles})
       })

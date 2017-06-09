@@ -23,33 +23,48 @@ router.get('/annotate', checkSession, async function (req, res, next) {
 
   // Take the question and its tags
   async function getQuestionAndTags () {
-    const question = await req.core.questions.show(questionId)
-    const answer = question.answer.map(async (answer) => {
-      const tag = await req.core.tags.show(answer.tag)
-      return {
-        tag,
-        required: answer.required
-      }
-    })
-    question.answer = await Promise.all(answer)
-    return question
+    try {
+      const question = await req.core.questions.show(questionId)
+      const answer = question.answer.map(async (answer) => {
+        const tag = await req.core.tags.show(answer.tag)
+        return {
+          tag,
+          required: answer.required
+        }
+      })
+      question.answer = await Promise.all(answer)
+      return question
+    } catch (e) {
+      console.log('error 1')
+      console.log(e)
+    }
   }
 
   // Take the article and parse it
   async function getArticle () {
-    const article = await req.core.articles.show(articleId)
-    const content = await downloadArticle(article.source.uri)
-    article.content = content
-    return article
+    try {
+      const article = await req.core.articles.show(articleId)
+      const content = await downloadArticle(article.source.uri)
+      article.content = content
+      return article
+    } catch (e) {
+      console.log('error 2')
+      console.log(e)
+    }
   }
 
   // Paralelize
-  const [question, article] = await Promise.all([
-    getQuestionAndTags(),
-    getArticle()
-  ])
+  try {
+    const [question, article] = await Promise.all([
+      getQuestionAndTags(),
+      getArticle()
+    ])
 
-  return res.render('annotate', {question, article})
+    return res.render('annotate', {question, article})
+  } catch (e) {
+    console.log('error 3')
+    console.log(e)
+  }
 })
 
 router.get('/about', (req, res, next) => {
