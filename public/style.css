@@ -56,3 +56,15 @@ mark {
 .bg-primary a {
   color: #78fd07;
 }
+
+.article-title {
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.article-body {
+  font-size: 20px;
+  font-family: "Georgia",serif;
+  line-height: 1.5;
+  letter-spacing: 0.014em;
+}

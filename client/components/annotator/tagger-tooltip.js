@@ -19,7 +19,8 @@ const TaggerTooltip = ({ list, selected, onSelect, onUnselect, position }) => (
       opacity: 1,
       position: 'fixed',
       top: (position.top + position.height) + 'px',
-      left: (position.left) + 'px'
+      left: (position.left + position.width / 2) + 'px',
+      transform: 'translateX(-50%)'
     }}
   >
     <div className="tooltip-arrow"></div>

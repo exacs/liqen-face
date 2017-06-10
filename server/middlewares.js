@@ -31,8 +31,8 @@ export function login (req, res, next) {
     })
     .then(session => {
       cookies
-        .set('access_token', session.access_token)
-        .set('user_id', session.user.id)
+        .set('access_token', session.access_token, {httpOnly: false})
+        .set('user_id', session.user.id, {httpOnly: false})
 
       req.user = session.user
       next()

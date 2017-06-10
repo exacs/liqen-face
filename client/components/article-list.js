@@ -2,6 +2,15 @@ import React from 'react'
 import Question from './question'
 import Article from './article'
 import liqen from 'liqen'
+import fakeLiqen from '../../server/local-liqen'
+import cookies from 'cookies-js'
+
+const token = cookies.get('access_token')
+let core = liqen(token)
+
+if (process.env.NODE_ENV === 'development') {
+  core = fakeLiqen(token)
+}
 
 class ArticleList extends React.Component {
   constructor (props) {
@@ -20,7 +29,7 @@ class ArticleList extends React.Component {
   }
 
   componentWillMount () {
-    liqen('', { apiURI: 'http://localhost:4000' }).articles.index()
+    core.articles.index()
       .then(articles => {
         console.log(articles); this.setState({articles})
       })
