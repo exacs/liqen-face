@@ -3,17 +3,17 @@ import SelectableAnnotation from './selectable-annotation'
 
 export default function Selector ({ annotations, onSelect }) {
   return (
-    <ul>
+    <div>
       {
         annotations.map(annotation => (
-          <li key={annotation.ref}>
+          <div key={annotation.ref}>
             <SelectableAnnotation
               annotation={annotation}
               pending={annotation.pending}
               onSelect={() => onSelect(annotation)} />
-          </li>
+          </div>
         ))
       }
-    </ul>
+    </div>
   )
 }

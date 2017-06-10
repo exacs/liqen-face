@@ -28,6 +28,7 @@ const disappearing = keyframes`
 `
 
 const Bar = styled.div`
+  height: 1px;
   position: absolute;
   background: #00CC00;
   transform-origin: left;
@@ -75,9 +76,9 @@ export default class ProgressBar extends React.Component {
 
   render () {
     return (
-      <div style={{ position: 'relative', width: '100%', height: '30px' }}>
-        {this.state.showSlow && <SlowBar>Bar 2</SlowBar>}
-        {this.state.showFast && <FastBar>Bar 1</FastBar>}
+      <div style={{ position: 'absolute', width: '100%', height: '1px', bottom: '0' }}>
+        {this.state.showSlow && <SlowBar></SlowBar>}
+        {this.state.showFast && <FastBar></FastBar>}
       </div>
     )
   }
