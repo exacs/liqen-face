@@ -40,6 +40,10 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      DEBUG: true
+    })
   ]
 }
