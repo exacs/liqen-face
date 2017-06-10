@@ -88,6 +88,14 @@ const localLiqen = token => ({
         title: ['Place of origin', 'Reason', 'Destination'][id - 1]
       })
     }
+  },
+
+  annotations: {
+    create (obj) {
+      return Promise.resolve(Object.assign({
+        id: Math.floor(Math.random() * 1000)
+      }, obj))
+    }
   }
 })
 
