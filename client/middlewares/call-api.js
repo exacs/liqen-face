@@ -1,4 +1,7 @@
 import liqen from 'liqen'
+import fakeLiqen from '../../server/local-liqen'
+import cookies from 'cookies-js'
+
 export const CALL_API = Symbol('call api')
 
 export default store => next => action => {
@@ -6,6 +9,13 @@ export default store => next => action => {
 
   if (typeof callAPI === 'undefined') {
     return next(action)
+  }
+
+  const token = cookies.get('access_token')
+  let core = liqen(token)
+
+  if (process.env.NODE_ENV === 'development') {
+    core = fakeLiqen(token)
   }
 
   const { ref, target, tag } = callAPI
@@ -19,7 +29,7 @@ export default store => next => action => {
   })
 
   // Send to the server the update
-  liqen()
+  core
     .annotations
     .create({
       article_id: 1,
