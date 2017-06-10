@@ -8,16 +8,16 @@ import { createAnnotation } from '../actions/index'
 const question = JSON.parse(window.QUESTION)
 const tags = question.answer.map(a => a.tag)
 
-function convertObjectToReact (obj) {
+function convertObjectToReact (obj, key) {
   if (typeof obj === 'string') {
     return obj
   } else {
-    const children = obj.children.map(convertObjectToReact)
+    const children = obj.children.map((item, i) => convertObjectToReact(item, i))
 
     if (children.length === 1) {
-      return React.createElement(obj.name, obj.attrs, children[0])
+      return React.createElement(obj.name, Object.assign({key}, obj.attrs), children[0])
     } else {
-      return React.createElement(obj.name, obj.attrs, children)
+      return React.createElement(obj.name, Object.assign({key}, obj.attrs), children)
     }
   }
 }
@@ -25,8 +25,9 @@ function convertObjectToReact (obj) {
 const EncapsulatedArticle = ({ onCreateAnnotation }) => (
   <div>
     {
-      JSON.parse(window.BODY_JSON).children.map(child => (
+      JSON.parse(window.BODY_JSON).children.map((child, i) => (
         <Annotator
+          key={i}
           annotations={[]}
           tags={tags}
           onCreateAnnotation={onCreateAnnotation}
@@ -48,7 +49,7 @@ export function Annotate ({ annotations, onCreateAnnotation }) {
             onSelect={() => console.log('heyheyhey') }/>
         </aside>
         <div className='col-lg-8 col-xl-7'>
-          <main>
+          <main className='article-body'>
             <EncapsulatedArticle onCreateAnnotation={onCreateAnnotation} />
           </main>
         </div>
