@@ -28,6 +28,13 @@ export default store => next => action => {
     tag
   })
 
+  // Add annotation to liqen
+  next({
+    type: 'ADD_ANNOTATION_TO_LIQEN',
+    annotation: ref,
+    tag
+  })
+
   // Send to the server the update
   core
     .annotations

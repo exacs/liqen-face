@@ -1,31 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function LiqenCreator ({ onSubmit, onRemoveAnnotation, answer }) {
+export default function LiqenCreator ({ onSubmit, answer, question }) {
+  const tags = answer.map(a => a.tag.title)
+  const last = tags[tags.length - 1]
+
   return (
     <div className='card'>
       <div className='card-img-top bg-primary' style={{height: '5em'}}>
       </div>
       <div className='card-block'>
-        <h4 className='card-title'>The Question</h4>
-        <p className='card-text small'>Highlight <mark>Place of origin, Reason and Destination</mark> in the text to answer this question</p>
+        <h4 className='card-title'>{question}</h4>
+        <p className='card-text small'>Highlight <mark>{ tags.slice(0, -1).join(', ') + ' and ' + last }</mark> in the text to answer this question</p>
       </div>
       <ul className='list-group list-group-flush'>
-        <li className='list-group-item'>
-          <span className='badge badge-default'># Place of origin</span>
-          <blockquote className='w-100'>
-            Super long long long logogneogn eiojfgieojf ioejf oejfeiof ejfoi
-          </blockquote>
-        </li>
-        <li className='list-group-item'>
-          <span className='badge badge-default'># Reason</span>
-          <blockquote className='w-100'>
-            Small
-          </blockquote>
-        </li>
-        <li className='list-group-item'>
-          <span className='badge badge-default'># Destination</span>
-        </li>
+        {
+          answer.map(a => (
+            <li
+              className='list-group-item'
+              key={a.tag.id}
+            >
+              <span className='badge badge-default'># {a.tag.title}</span>
+              <blockquote className='w-100'>
+                {
+                  a.annotation && a.annotation.target && a.annotation.target.exact
+                }
+              </blockquote>
+            </li>
+          ))
+        }
       </ul>
       <div className='card-block text-right'>
         <button className="btn btn-outline-primary" disabled>Send Liqen Answer</button>
@@ -35,7 +38,7 @@ export default function LiqenCreator ({ onSubmit, onRemoveAnnotation, answer }) 
 }
 
 LiqenCreator.propTypes = {
+  question: PropTypes.string,
   answer: PropTypes.array,
-  onRemoveAnnotation: PropTypes.func,
   onSubmit: PropTypes.func
 }

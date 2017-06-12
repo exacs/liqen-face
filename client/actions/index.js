@@ -4,6 +4,8 @@ export const CREATE_ANNOTATION_SUCCESS = 'CREATE_ANNOTATION_SUCCESS'
 export const CREATE_ANNOTATION_PENDING = 'CREATE_ANNOTATION_PENDING'
 export const CREATE_ANNOTATION_FAILURE = 'CREATE_ANNOTATION_FAILURE'
 
+export const ADD_ANNOTATION_TO_LIQEN = 'ADD_ANNOTATION_TO_LIQEN'
+
 let nextRef = 0
 export function createAnnotation (target, tag) {
   const ref = nextRef

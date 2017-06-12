@@ -6,8 +6,8 @@ import Selector from '../components/annotator-drawer/selector'
 import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation } from '../actions/index'
 
-const question = JSON.parse(window.QUESTION)
-const tags = question.answer.map(a => a.tag)
+// const question = JSON.parse(window.QUESTION)
+// const tags = question
 
 function convertObjectToReact (obj, key) {
   if (typeof obj === 'string') {
@@ -23,7 +23,7 @@ function convertObjectToReact (obj, key) {
   }
 }
 
-const EncapsulatedArticle = ({ onCreateAnnotation }) => (
+const EncapsulatedArticle = ({ onCreateAnnotation, tags }) => (
   <div>
     {
       JSON.parse(window.BODY_JSON).children.map((child, i) => (
@@ -40,19 +40,23 @@ const EncapsulatedArticle = ({ onCreateAnnotation }) => (
   </div>
 )
 
-export function Annotate ({ annotations, onCreateAnnotation }) {
+export function Annotate ({ question, answer, annotations, onCreateAnnotation }) {
   return (
     <div className='container mt-4'>
       <div className='row'>
         <aside className='hidden-md-down col-lg-4 flex-last'>
-          <LiqenCreator />
+          <LiqenCreator
+            question={question}
+            answer={answer} />
           <Selector
             annotations={annotations}
             onSelect={() => console.log('heyheyhey') }/>
         </aside>
         <div className='col-lg-8 col-xl-7'>
           <main className='article-body'>
-            <EncapsulatedArticle onCreateAnnotation={onCreateAnnotation} />
+            <EncapsulatedArticle
+              tags={answer.map(a => a.tag)}
+              onCreateAnnotation={onCreateAnnotation} />
           </main>
         </div>
       </div>
@@ -60,8 +64,26 @@ export function Annotate ({ annotations, onCreateAnnotation }) {
   )
 }
 
+const mapAnswer = (answer, annotations) => answer.map(a => {
+  // Choose the annotation with a.annotation == annotation.id
+  const annotation = annotations.filter(
+    annotation => annotation.ref === a.annotation
+  )[0]
+
+  // Return the target
+  return annotation
+        ? Object.assign({}, a, {
+          annotation: {
+            target: annotation.target
+          }
+        })
+       : a
+})
+
 const mapStateToProps = (state) => ({
-  annotations: state
+  question: state.question.title,
+  answer: mapAnswer(state.question.answer, state.annotations),
+  annotations: state.annotations
 })
 const mapDispatchToProps = (dispatch) => ({
   onCreateAnnotation: ({target, tag}) => dispatch(createAnnotation(target, tag))

@@ -104,7 +104,13 @@ router.get('/annotate', checkSession, async function (req, res, next) {
       getArticle()
     ])
 
-    return res.render('annotate', {question, article})
+    const state = {
+      question,
+      annotations: [],
+      liqen: {}
+    }
+
+    return res.render('annotate', {article, state})
   } catch (e) {
     console.log('error 3')
     console.log(e)

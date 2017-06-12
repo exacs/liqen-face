@@ -8,7 +8,11 @@ import callAPI from './middlewares/call-api'
 import Annotate from './containers/Annotate'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(reducer, [], composeEnhancers(applyMiddleware(callAPI)))
+const store = createStore(
+  reducer,
+  JSON.parse(window.__INITIAL_STATE__),
+  composeEnhancers(applyMiddleware(callAPI))
+)
 
 ReactDOM.render(
   <Provider store={store}>
