@@ -1,6 +1,7 @@
 import liqen from 'liqen'
 import fakeLiqen from '../../server/local-liqen'
 import cookies from 'cookies-js'
+import * as ActionType from '../actions'
 
 export const CALL_API = Symbol('call api')
 
@@ -18,47 +19,60 @@ export default store => next => action => {
     core = fakeLiqen(token)
   }
 
-  const { ref, target, tag } = callAPI
+  // Middleware starts here
+  const { ref, type, actions } = callAPI
+
+  // Prepare things to send to the server
+  let payload = {}
+  let fn = function fn () {}
+  let key = ''
+
+  switch (type) {
+    case ActionType.CREATE_ANNOTATION:
+      const tag = callAPI.annotation.tag
+      payload = {
+        article_id: 1,
+        target: {
+          type: 'TextQuoteSelector',
+          prefix: callAPI.annotation.target.prefix,
+          exact: callAPI.annotation.target.exact,
+          suffix: callAPI.annotation.target.suffix
+        },
+        tags: [store.getState().tags[tag].id]
+      }
+      fn = core.annotations.create
+      key = 'annotation'
+      break
+  }
+
+  // Prepare what to send to the Store
+  let localPayload = {}
+  switch (type) {
+    case ActionType.CREATE_ANNOTATION:
+      localPayload = {
+        tag: callAPI.annotation.tag,
+        target: callAPI.annotation.target
+      }
+      break
+  }
 
   // Send a pending
   next({
-    type: 'CREATE_ANNOTATION_PENDING',
     ref,
-    target,
-    tag
+    type: actions[0],
+    [key]: localPayload
   })
 
-  // Add annotation to liqen
-  next({
-    type: 'ADD_ANNOTATION_TO_LIQEN',
-    annotation: ref,
-    tag
-  })
-
-  // Send to the server the update
-  core
-    .annotations
-    .create({
-      article_id: 1,
-      target: {
-        type: 'TextQuoteSelector',
-        prefix: target.prefix,
-        exact: target.exact,
-        suffix: target.suffix
-      },
-      tags: [tag]
-    })
-    .then(({id}) => next({
-      type: 'CREATE_ANNOTATION_SUCCESS',
+  // Call API
+  fn(payload)
+    .then(object => next({
       ref,
-      id,
-      target,
-      tag
+      type: actions[1],
+      [key]: object
     }))
-    .catch(() => next({
-      type: 'CREATE_ANNOTATION_FAILURE',
+    .catch(err => next({
       ref,
-      target,
-      tag
+      type: actions[2],
+      error: err
     }))
 }

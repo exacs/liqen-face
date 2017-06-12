@@ -2,26 +2,58 @@ import * as ActionTypes from '../actions/index'
 
 const initialState = {
   question: {
-    id: 0,
-    title: '',
+    id: 12,
+    title: 'Title of the question',
     answer: [
       {
-        tag: {
-          id: 0,
-          title: 'tag 0'
-        },
-        required: true,
-        annotation: 0
+        tag: 't1',
+        required: true
       }
     ]
   },
-  annotations: []
+  annotations: {
+    a1: {
+      id: 908,
+      tag: 't1',
+      target: {
+        prefix: 'como ',
+        exact: 'analista',
+        suffix: ' económico en una organización no gubernamental.'
+      },
+      checked: false,
+      pending: false
+    }
+  },
+  liqens: {
+    'l1': {
+      id: 9,
+      annotations: ['a1']
+    }
+  },
+  tags: {
+    't1': {
+      id: 1209,
+      title: 'tag 1'
+    },
+    't2': {
+      id: 1238,
+      title: 'tag 2'
+    }
+  },
+  newLiqen: {
+    answer: [
+      'a1'
+    ]
+  }
 }
 
 export default function reducer (state = initialState, action = {}) {
   return {
-    question: questionReducer(state.question, action),
-    annotations: annotationReducer(state.annotations, action)
+    question: state.question,
+    annotations: annotationReducer(state.annotations, action),
+    liqens: state.liqens,
+    tags: state.tags,
+    newLiqen: state.newLiqen
   }
 }
 
@@ -52,25 +84,39 @@ function questionReducer (state = initialState.question, action) {
 function annotationReducer (state = initialState.annotations, action = {}) {
   switch (action.type) {
     case ActionTypes.CREATE_ANNOTATION_PENDING:
-      return state.concat({
-        ref: action.ref,
-        target: action.target,
-        tag: action.tag,
+      const annotation = {
+        tag: action.annotation.tag,
+        target: action.annotation.target,
+        checked: false,
         pending: true
+      }
+
+      return Object.assign({}, state, {
+        [action.ref]: annotation
       })
 
     case ActionTypes.CREATE_ANNOTATION_SUCCESS:
-    case ActionTypes.CREATE_ANNOTATION_FAILURE:
-      return state.map(a => action.ref === a.ref
-                        ? {
-                          ref: a.ref,
-                          target: a.target,
-                          tag: a.tag,
-                          pending: false,
-                          id: action.id
-                        }
-                        : a)
+      return Object.assign({}, state, {
+        [action.ref]: {
+          tag: state[action.ref].tag,
+          target: state[action.ref].target,
+          checked: state[action.ref].checked,
+          pending: false,
+          id: action.annotation.id
+        }
+      })
 
+    case ActionTypes.CREATE_ANNOTATION_FAILURE:
+    default:
+      return state
+  }
+}
+
+function liqenReducer (state = initialState.liqens, action = {}) {
+  switch (action.type) {
+    case ActionTypes.CREATE_LIQEN_PENDING:
+    case ActionTypes.CREATE_LIQEN_SUCCESS:
+    case ActionTypes.CREATE_LIQEN_FAILURE:
     default:
       return state
   }

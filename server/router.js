@@ -25,15 +25,20 @@ router.get('/annotate', checkSession, async function (req, res, next) {
   async function getQuestionAndTags () {
     try {
       const question = await req.core.questions.show(questionId)
-      const answer = question.answer.map(async (answer) => {
+      const tags = await Promise.all(question.answer.map(async (answer) => {
         const tag = await req.core.tags.show(answer.tag)
-        return {
-          tag,
-          required: answer.required
-        }
-      })
-      question.answer = await Promise.all(answer)
-      return question
+        return tag
+      }))
+
+      const tags2 = {}
+      for (let tag of tags) {
+        tags2[tag.id] = tag
+      }
+
+      return {
+        question,
+        tags: tags2
+      }
     } catch (e) {
       console.log('error 1')
       console.log(e)
@@ -99,15 +104,17 @@ router.get('/annotate', checkSession, async function (req, res, next) {
 
   // Paralelize
   try {
-    const [question, article] = await Promise.all([
+    const [{question, tags}, article] = await Promise.all([
       getQuestionAndTags(),
       getArticle()
     ])
 
     const state = {
       question,
-      annotations: [],
-      liqen: {}
+      tags,
+      annotations: {},
+      liqens: {},
+      newLiqen: {}
     }
 
     return res.render('annotate', {article, state})
