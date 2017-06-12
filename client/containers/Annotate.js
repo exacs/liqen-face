@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import Annotator from '../components/annotator'
 import Selector from '../components/annotator-drawer/selector'
+import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation } from '../actions/index'
 
 const question = JSON.parse(window.QUESTION)
@@ -44,6 +45,7 @@ export function Annotate ({ annotations, onCreateAnnotation }) {
     <div className='container mt-4'>
       <div className='row'>
         <aside className='hidden-md-down col-lg-4 flex-last'>
+          <LiqenCreator />
           <Selector
             annotations={annotations}
             onSelect={() => console.log('heyheyhey') }/>

@@ -3,37 +3,33 @@ import PropTypes from 'prop-types'
 
 export default function LiqenCreator ({ onSubmit, onRemoveAnnotation, answer }) {
   return (
-    <div>
-      <dl>
-        {
-          answer.map(({ annotation, tag, required }) => (
-            <div key={tag.id}>
-              <dt>
-                {tag.title}
-              </dt>
-              <dd>
-                {
-                  annotation
-                  ? (
-                    <div>
-                      {annotation.target.exact}
-                      <button type="button" className="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                  )
-                  : (
-                    <div>
-                      No annotation selected
-                    </div>
-                  )
-                }
-              </dd>
-            </div>
-          ))
-        }
-      </dl>
-      <button onClick={() => onSubmit()}>Create Liqen</button>
+    <div className='card'>
+      <div className='card-img-top bg-primary' style={{height: '5em'}}>
+      </div>
+      <div className='card-block'>
+        <h4 className='card-title'>The Question</h4>
+        <p className='card-text'>Highlight the text looking for the following information</p>
+      </div>
+      <ul className='list-group list-group-flush'>
+        <li className='list-group-item'>
+          <span className='badge badge-default'># Place of origin</span>
+          <blockquote className='w-100'>
+            Super long long long logogneogn eiojfgieojf ioejf oejfeiof ejfoi
+          </blockquote>
+        </li>
+        <li className='list-group-item'>
+          <span className='badge badge-default'># Reason</span>
+          <blockquote className='w-100'>
+            Small
+          </blockquote>
+        </li>
+        <li className='list-group-item'>
+          <span className='badge badge-default'># Destination</span>
+        </li>
+      </ul>
+      <div className='card-block text-right'>
+        <button className="btn btn-outline-primary" disabled>Create Liqen</button>
+      </div>
     </div>
   )
 }
