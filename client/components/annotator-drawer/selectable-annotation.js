@@ -5,7 +5,7 @@ import ProgressBar from './progress-bar'
 export default class SelectableAnnotation extends React.Component {
   render () {
     return (
-      <div className='card mb-2' onClick={() => this.props.onSelect()}>
+      <div className='card mb-2'>
         <div className='card-block'>
           <p className='card-text'>
             <span className="badge badge-default">
@@ -14,6 +14,14 @@ export default class SelectableAnnotation extends React.Component {
             <blockquote className='mb-0'>
               {this.props.annotation.target.exact}
             </blockquote>
+            <footer className='text-right'>
+              <button
+                className='btn btn-link btn-sm'
+                onClick={() => this.props.onSelect()}
+              >
+                Add to answer
+              </button>
+            </footer>
           </p>
         </div>
         <ProgressBar completed={!this.props.pending} />

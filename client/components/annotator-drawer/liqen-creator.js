@@ -8,7 +8,7 @@ export default function LiqenCreator ({ onSubmit, onRemoveAnnotation, answer }) 
       </div>
       <div className='card-block'>
         <h4 className='card-title'>The Question</h4>
-        <p className='card-text'>Highlight the text looking for the following information</p>
+        <p className='card-text small'>Highlight <mark>Place of origin, Reason and Destination</mark> in the text to answer this question</p>
       </div>
       <ul className='list-group list-group-flush'>
         <li className='list-group-item'>
@@ -28,7 +28,7 @@ export default function LiqenCreator ({ onSubmit, onRemoveAnnotation, answer }) 
         </li>
       </ul>
       <div className='card-block text-right'>
-        <button className="btn btn-outline-primary" disabled>Create Liqen</button>
+        <button className="btn btn-outline-primary" disabled>Send Liqen Answer</button>
       </div>
     </div>
   )
