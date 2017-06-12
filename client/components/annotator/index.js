@@ -105,6 +105,6 @@ Annotator.propTypes = {
   annotations: PropTypes.array,
   tags: PropTypes.array,
   children: PropTypes.node,
-  onCreateAnnotation: PropTypes.func,
+  onCreateAnnotation: PropTypes.func.isRequired,
   onDeleteAnnotation: PropTypes.func
 }

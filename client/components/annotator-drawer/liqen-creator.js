@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function LiqenCreator ({ onSubmit, answer, question }) {
-  const tags = answer.map(a => a.tag.title)
+  const tags = answer.map(a => a.title)
   const last = tags[tags.length - 1]
 
   return (
@@ -15,17 +15,13 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
       </div>
       <ul className='list-group list-group-flush'>
         {
-          answer.map(a => (
+          answer.map(({title, exact}, i) => (
             <li
               className='list-group-item'
-              key={a.tag.id}
+              key={i}
             >
-              <span className='badge badge-default'># {a.tag.title}</span>
-              <blockquote className='w-100'>
-                {
-                  a.annotation && a.annotation.target && a.annotation.target.exact
-                }
-              </blockquote>
+              <span className='badge badge-default'># {title}</span>
+              <blockquote className='w-100'>{exact}</blockquote>
             </li>
           ))
         }
@@ -38,7 +34,12 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
 }
 
 LiqenCreator.propTypes = {
-  question: PropTypes.string,
-  answer: PropTypes.array,
+  question: PropTypes.string.isRequired,
+  answer: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      exact: PropTypes.string.isRequired
+    })
+  ).isRequired,
   onSubmit: PropTypes.func
 }

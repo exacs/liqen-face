@@ -46,9 +46,9 @@ const TaggerTooltip = ({ list, selected, onSelect, onUnselect, position }) => (
            }}
          >
            {
-             list.map(tag => (
+             list.map(({ref, title}) => (
                <li
-                 key={tag.id}
+                 key={ref}
                  style={{
                    padding: '5px'
                  }}
@@ -65,9 +65,9 @@ const TaggerTooltip = ({ list, selected, onSelect, onUnselect, position }) => (
                      outline: 'none',
                      textAlign: 'left'
                    }}
-                   onClick={() => onSelect(tag)}
+                   onClick={() => onSelect(ref)}
                  >
-                   {tag.title}
+                   {title}
                  </button>
                </li>
              ))
@@ -79,9 +79,12 @@ const TaggerTooltip = ({ list, selected, onSelect, onUnselect, position }) => (
 )
 
 TaggerTooltip.propTypes = {
-  list: PropTypes.array,
+  list: PropTypes.arrayOf({
+    ref: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+  }),
   selected: PropTypes.number,
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func.isRequired,
   onUnselect: PropTypes.func
 }
 

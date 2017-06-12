@@ -9,10 +9,10 @@ export default class SelectableAnnotation extends React.Component {
         <div className='card-block'>
           <p className='card-text'>
             <span className="badge badge-default">
-              # {this.props.annotation.tag.title}
+              # {this.props.tag}
             </span>
             <blockquote className='mb-0'>
-              {this.props.annotation.target.exact}
+              {this.props.target.exact}
             </blockquote>
             <footer className='text-right'>
               <button
@@ -32,7 +32,12 @@ export default class SelectableAnnotation extends React.Component {
 
 SelectableAnnotation.propTypes = {
   checked: PropTypes.bool,
-  annotation: PropTypes.object,
+  tag: PropTypes.string.isRequired,
+  target: PropTypes.shape({
+    prefix: PropTypes.string.isRequired,
+    exact: PropTypes.string.isRequired,
+    suffix: PropTypes.string.isRequired
+  }),
   pending: PropTypes.bool,
   onSelect: PropTypes.func
 }

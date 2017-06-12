@@ -180,12 +180,12 @@ Highlighter.propTypes = {
     PropTypes.string,
     PropTypes.array,
     PropTypes.node
-  ]),
+  ]).isRequired,
   fragment: PropTypes.shape({
     prefix: PropTypes.string,
     exact: PropTypes.string,
     suffix: PropTypes.string
   }),
-  onHighlight: PropTypes.func,
+  onHighlight: PropTypes.func.isRequired,
   onUnhighlight: PropTypes.func
 }
