@@ -5,7 +5,7 @@ import zipWith from 'lodash/fp/zipWith'
 import Annotator from '../components/annotator'
 import Selector from '../components/annotator-drawer/selector'
 import LiqenCreator from '../components/annotator-drawer/liqen-creator'
-import { createAnnotation } from '../actions/index'
+import { createAnnotation, createLiqen } from '../actions/index'
 
 // const question = JSON.parse(window.QUESTION)
 // const tags = question
@@ -47,7 +47,8 @@ export function Annotate (
     answer,
     annotations,
     tags,
-    onCreateAnnotation
+    onCreateAnnotation,
+    onCreateLiqen
   }
 ) {
   return (
@@ -56,7 +57,8 @@ export function Annotate (
         <aside className='hidden-md-down col-lg-4 flex-last'>
           <LiqenCreator
             question={question}
-            answer={answer} />
+            answer={answer}
+            onSubmit={onCreateLiqen} />
           <Selector
             annotations={annotations}
             onSelect={(e) => console.log(e) }/>
@@ -116,10 +118,22 @@ const mapStateToProps = (state) => ({
   annotations: mapStateToAnnotations(state),
   tags: state.question.answer.map(
     ({tag}) => ({ref: tag, title: state.tags[tag].title})
+  ),
+  enableCreateLiqen: state.newLiqen.answer.every(
+    a => state.annotations[a] && !state.annotations[a].pending
   )
 })
 const mapDispatchToProps = (dispatch) => ({
-  onCreateAnnotation: ({target, tag}) => dispatch(createAnnotation(target, tag))
+  onCreateAnnotation: ({target, tag}) => dispatch(createAnnotation(target, tag)),
+  onCreateLiqen: () => dispatch(createLiqen())
 })
+const mergeProps = (stateProps, dispatchProps) =>
+  Object.assign({}, stateProps, dispatchProps, {
+    onCreateLiqen: stateProps.enableCreateLiqen && dispatchProps.onCreateLiqen
+  })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Annotate)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(Annotate)
