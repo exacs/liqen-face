@@ -2,8 +2,27 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function LiqenCreator ({ onSubmit, answer, question }) {
-  const tags = answer.map(a => a.title)
-  const last = tags[tags.length - 1]
+  const tags = answer.map(
+    (a, i) => a.title && a.exact
+          ? <mark><strike>{a.title}</strike></mark>
+          : <mark>{a.title}</mark>
+  )
+  const complete = answer.every(a => a.title && a.exact)
+
+  const pluralize = (tags) => {
+    const ret = []
+    const exceptLast = tags.slice(0, -1)
+    const last = tags[tags.length - 1]
+
+    exceptLast.forEach(tag => {
+      ret.push(tag)
+      ret.push(', ')
+    })
+    ret[ret.length - 1] = ' and '
+    ret.push(last)
+
+    return ret
+  }
 
   return (
     <div className='card'>
@@ -11,27 +30,43 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
       </div>
       <div className='card-block'>
         <h4 className='card-title'>{question}</h4>
-        <p className='card-text small'>Highlight <mark>{ tags.slice(0, -1).join(', ') + ' and ' + last }</mark> in the text to answer this question</p>
-      </div>
-      <ul className='list-group list-group-flush'>
         {
-          answer.map(({title, exact}, i) => (
-            <li
-              className='list-group-item'
-              key={i}
-            >
-              <span className='badge badge-default'># {title}</span>
-              <blockquote className='w-100'>{exact}</blockquote>
-            </li>
-          ))
+          !complete && (
+            <p className='card-text small'>
+              <span>Highlight </span>
+              {
+                tags.length === 1 ? tags : pluralize(tags)
+              }
+              <span> in the text to answer this question</span>
+            </p>
+          )
         }
-      </ul>
-      <div className='card-block text-right'>
-        <button
-          className="btn btn-outline-primary"
-          disabled={!onSubmit}
-          onClick={() => onSubmit()}>Send Liqen Answer</button>
       </div>
+      {
+        complete && (
+          <div>
+            <ul className='list-group list-group-flush'>
+              {
+                answer.map(({title, exact}, i) => (
+                  <li
+                    className='list-group-item'
+                    key={i}
+                  >
+                    <span className='badge badge-default'># {title}</span>
+                    <blockquote className='w-100'>{exact}</blockquote>
+                  </li>
+                ))
+              }
+            </ul>
+            <div className='card-block text-right'>
+              <button
+                className="btn btn-outline-primary"
+                disabled={!onSubmit}
+                onClick={() => onSubmit()}>Send Liqen Answer</button>
+            </div>
+          </div>
+        )
+      }
     </div>
   )
 }
