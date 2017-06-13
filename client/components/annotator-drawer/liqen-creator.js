@@ -26,12 +26,11 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
 
   return (
     <div className='card'>
-      <div className='card-img-top bg-primary' style={{height: '5em'}}>
-      </div>
       <div className='card-block'>
         <h4 className='card-title'>{question}</h4>
         {
-          !complete && (
+          !complete
+          ? (
             <p className='card-text small'>
               <span>Highlight </span>
               {
@@ -39,6 +38,12 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
               }
               <span> in the text to answer this question</span>
             </p>
+          )
+          : (
+            <div>
+              <div className='card-text'>This is your Liqen answer</div>
+              <div className='card-text small'>Change it choosing other annotations</div>
+            </div>
           )
         }
       </div>
@@ -62,7 +67,7 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
               <button
                 className="btn btn-outline-primary"
                 disabled={!onSubmit}
-                onClick={() => onSubmit()}>Send Liqen Answer</button>
+                onClick={() => onSubmit()}>Send Answer</button>
             </div>
           </div>
         )

@@ -55,11 +55,12 @@ export function Annotate (
     <div className='container mt-4'>
       <div className='row'>
         <aside className='hidden-md-down col-lg-4 flex-last'>
+          <h3 className='h6 text-uppercase text-muted'>The Question</h3>
           <LiqenCreator
             question={question}
             answer={answer}
             onSubmit={onCreateLiqen} />
-          <h3 className='h6 text-uppercase text-muted'>Annotations</h3>
+          <h3 className='h6 text-uppercase text-muted'>Your annotations</h3>
           <Selector
             annotations={annotations}
             onSelect={(e) => console.log(e) }/>
