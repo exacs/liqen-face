@@ -59,6 +59,7 @@ export function Annotate (
             question={question}
             answer={answer}
             onSubmit={onCreateLiqen} />
+          <h3 className='h6 text-uppercase text-muted'>Annotations</h3>
           <Selector
             annotations={annotations}
             onSelect={(e) => console.log(e) }/>
