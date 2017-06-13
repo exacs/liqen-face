@@ -1,4 +1,5 @@
 import * as ActionTypes from '../actions/index'
+import zipWith from 'lodash/fp/zipWith'
 
 const initialState = {
   question: {
@@ -53,31 +54,19 @@ export default function reducer (state = initialState, action = {}) {
     annotations: annotationReducer(state.annotations, action),
     liqens: state.liqens,
     tags: state.tags,
-    newLiqen: state.newLiqen
+    newLiqen: newLiqenReducer(state.newLiqen, action, state)
   }
 }
 
-function questionReducer (state = initialState.question, action) {
+function newLiqenReducer (newLiqen, action, state) {
   switch (action.type) {
-    case ActionTypes.ADD_ANNOTATION_TO_LIQEN:
+    case ActionTypes.CREATE_ANNOTATION_PENDING:
+      const zipper = (old, {tag}) => tag === action.annotation.tag ? action.ref : old
       return {
-        title: state.title,
-        id: state.id,
-        answer: state.answer.map(a => {
-          if (action.tag.id === a.tag.id) {
-            return {
-              tag: a.tag,
-              required: a.required,
-              annotation: action.annotation
-            }
-          } else {
-            return a
-          }
-        })
+        answer: zipWith(zipper, newLiqen.answer, state.question.answer)
       }
-
     default:
-      return state
+      return newLiqen
   }
 }
 
