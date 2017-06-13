@@ -82,10 +82,13 @@ const mapStateToAnswer = (state) => {
   )
 
   const liqenAnswer = state.newLiqen.answer.map(
-    a => state.annotations[a]
+    a => state.annotations[a] || null
   )
 
-  const zipper = (qa, la) => ({title: qa.tag, exact: la.target.exact})
+  const zipper = (qa, la) => ({
+    title: qa.tag,
+    exact: (la && la.target && la.target.exact) || ''
+  })
   return zipWith(zipper, questionAnswer, liqenAnswer)
 }
 

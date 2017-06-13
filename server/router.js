@@ -114,7 +114,9 @@ router.get('/annotate', checkSession, async function (req, res, next) {
       tags,
       annotations: {},
       liqens: {},
-      newLiqen: {}
+      newLiqen: {
+        answer: question.answer.map(a => null)
+      }
     }
 
     return res.render('annotate', {article, state})
