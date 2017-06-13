@@ -96,6 +96,14 @@ const localLiqen = token => ({
         id: Math.floor(Math.random() * 1000)
       }, obj))
     }
+  },
+
+  liqens: {
+    create (obj) {
+      return Promise.resolve(Object.assign({
+        id: Math.floor(Math.random() * 1000)
+      }, obj))
+    }
   }
 })
 

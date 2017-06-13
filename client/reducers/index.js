@@ -52,7 +52,7 @@ export default function reducer (state = initialState, action = {}) {
   return {
     question: state.question,
     annotations: annotationReducer(state.annotations, action),
-    liqens: state.liqens,
+    liqens: liqenReducer(state.liqens, action, state),
     tags: state.tags,
     newLiqen: newLiqenReducer(state.newLiqen, action, state)
   }
@@ -65,6 +65,18 @@ function newLiqenReducer (newLiqen, action, state) {
       return {
         answer: zipWith(zipper, newLiqen.answer, state.question.answer)
       }
+
+    case ActionTypes.CREATE_LIQEN_PENDING:
+      return {
+        answer: newLiqen.answer,
+        pending: true
+      }
+
+    case ActionTypes.CREATE_LIQEN_SUCCESS:
+      return {
+        answer: state.question.answer.map(a => null)
+      }
+
     default:
       return newLiqen
   }
@@ -101,12 +113,25 @@ function annotationReducer (state = initialState.annotations, action = {}) {
   }
 }
 
-function liqenReducer (state = initialState.liqens, action = {}) {
+function liqenReducer (liqens, action = {}, state) {
   switch (action.type) {
     case ActionTypes.CREATE_LIQEN_PENDING:
+      return Object.assign({}, liqens, {
+        [action.ref]: {
+          answer: state.newLiqen.answer,
+          pending: true
+        }
+      })
+
     case ActionTypes.CREATE_LIQEN_SUCCESS:
+      return Object.assign({}, liqens, {
+        [action.ref]: {
+          answer: liqens[action.ref].answer,
+          pending: false
+        }
+      })
     case ActionTypes.CREATE_LIQEN_FAILURE:
     default:
-      return state
+      return liqens
   }
 }

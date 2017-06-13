@@ -43,6 +43,17 @@ export default store => next => action => {
       fn = core.annotations.create
       key = 'annotation'
       break
+
+    case ActionType.CREATE_LIQEN:
+      payload = {
+        article_id: 1,
+        annotations: store.getState().newLiqen.answer.map(
+          a => store.getState().annotations[a].id
+        )
+      }
+      fn = core.liqens.create
+      key = 'liqen'
+      break
   }
 
   // Prepare what to send to the Store
@@ -53,6 +64,10 @@ export default store => next => action => {
         tag: callAPI.annotation.tag,
         target: callAPI.annotation.target
       }
+      break
+
+    case ActionType.CREATE_LIQEN:
+      localPayload = {}
       break
   }
 

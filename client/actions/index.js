@@ -61,10 +61,6 @@ export function createLiqen (question, annotations) {
         CREATE_LIQEN_SUCCESS,
         CREATE_LIQEN_FAILURE
       ],
-      liqen: {
-        question_id: question,
-        annotations: annotations
-      },
       ref
     }
   }
