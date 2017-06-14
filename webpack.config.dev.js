@@ -45,5 +45,11 @@ module.exports = {
       NODE_ENV: 'development',
       DEBUG: true
     })
-  ]
+  ],
+
+  devServer: {
+    hot: true,
+    contentBase: path.resolve(__dirname, 'public/dist'),
+    publicPath: '/static/dist'
+  }
 }

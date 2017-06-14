@@ -20,3 +20,16 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('react-root')
 )
+
+if (module.hot) {
+  module.hot.accept('./containers/Annotate', () => {
+    const Annotate = require('./containers/Annotate').default
+
+    ReactDOM.render(
+      <Provider store={store}>
+        <Annotate />
+      </Provider>,
+      document.getElementById('react-root')
+    )
+  })
+}
