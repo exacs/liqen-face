@@ -14,22 +14,17 @@ const store = createStore(
   composeEnhancers(applyMiddleware(callAPI))
 )
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Annotate />
-  </Provider>,
-  document.getElementById('react-root')
-)
+const render = Component => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Component />
+    </Provider>,
+    document.getElementById('react-root')
+  )
+}
+
+render(Annotate)
 
 if (module.hot) {
-  module.hot.accept('./containers/Annotate', () => {
-    const Annotate = require('./containers/Annotate').default
-
-    ReactDOM.render(
-      <Provider store={store}>
-        <Annotate />
-      </Provider>,
-      document.getElementById('react-root')
-    )
-  })
+  module.hot.accept('./containers/Annotate', () => render(Annotate))
 }
