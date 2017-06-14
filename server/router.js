@@ -103,51 +103,6 @@ router.get('/annotate', checkSession, async function (req, res, next) {
     try {
       const article = await req.core.articles.show(articleId)
 
-      if (process.env.NODE_ENV === 'development') {
-        article.content = {
-          body: {
-            object: {
-              name: 'div',
-              attrs: {},
-              children: [
-                {
-                  name: 'p',
-                  attrs: {},
-                  children: [
-                    'Mientras la anémica creación de empleo sigue siendo el Talón de Aquiles de la ',
-                    {
-                      name: 'a',
-                      attrs: {
-                        'href': 'http://www.bancomundial.org/es/region/lac/overview'
-                      },
-                      children: [
-                        'recuperación económica en EE.UU y Europa'
-                      ]
-                    },
-                    ', muchos profesionales latinoamericanos ven mejores oportunidades en esas tierras, en un éxodo que ha visto emigraciones de hasta 90% en algunos países del Caribe.'
-                  ]
-                },
-                {
-                  name: 'p',
-                  attrs: {},
-                  children: [
-                    'El colombiano Stefano Badalacchi es uno de ellos. Son las 7 AM de un húmedo día de otoño en París. Badalacchi, de 24 años, se ajusta la corbata al cuello mientras echa llave a la puerta de casa, acomoda en su hombro la bolsa con la ‘compu’, y se dirige hacia el metro que le llevará a su nuevo puesto de trabajo en Ivry Sur Senne, como analista económico en una organización no gubernamental.'
-                  ]
-                },
-                {
-                  name: 'p',
-                  attrs: {},
-                  children: [
-                    'Hace más de cinco años que se fue de Colombia, y afirma que no tiene intención de regresar, porque “aquí se te valora más como profesional”.'
-                  ]
-                }
-              ] // children
-            } // object
-          } // body
-        } // article.content
-      } else {
-        article.content = await downloadArticle(article.source.uri)
-      }
       return article
     } catch (e) {
       console.log('error 2')
