@@ -10,43 +10,45 @@ import { createAnnotation, createLiqen } from '../actions/index'
 const article = JSON.parse(window.__ARTICLE__)
 console.log(article)
 
-export function Annotate (
-  {
-    question,
-    answer,
-    annotations,
-    tags,
-    onCreateAnnotation,
-    onCreateLiqen
-  }
-) {
-  return (
-    <div className='row'>
-      <aside className='hidden-md-down col-lg-4 flex-last'>
-        <LiqenCreator
-          question={question}
-          answer={answer}
-          onSubmit={onCreateLiqen}
-        />
-        <Selector
-          annotations={annotations}
-          onSelect={(e) => console.log(e)}
-        />
-      </aside>
-      <div className='col-lg-8 col-xl-7'>
-        <header>
-          <h1 className="article-title">{article.title}</h1>
-        </header>
-        <main className='article-body'>
-          <Article
-            body={article.content.body.object}
-            tags={tags}
-            onCreateAnnotation={onCreateAnnotation}
+export class Annotate extends React.Component {
+  render () {
+    const {
+      question,
+      answer,
+      annotations,
+      tags,
+      onCreateAnnotation,
+      onCreateLiqen
+    } = this.props
+
+    return (
+      <div className='row'>
+        <aside className='hidden-md-down col-lg-4 flex-last'>
+          <LiqenCreator
+            question={question}
+            answer={answer}
+            onSubmit={onCreateLiqen}
           />
-        </main>
+          <Selector
+            annotations={annotations}
+            onSelect={(e) => console.log(e)}
+          />
+        </aside>
+        <div className='col-lg-8 col-xl-7'>
+          <header>
+            <h1 className="article-title">{article.title}</h1>
+          </header>
+          <main className='article-body'>
+            <Article
+              body={article.content.body.object}
+              tags={tags}
+              onCreateAnnotation={onCreateAnnotation}
+            />
+          </main>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const mapStateToAnswer = (state) => {
