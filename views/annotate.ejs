@@ -17,17 +17,18 @@
   </nav>
   <div class="container mt-4" id="react-root">
     <div class="row">
+      <aside class='hidden-md-down col-lg-4 flex-last'>
+        Loading question
+      </aside>
       <div class="col-lg-8 col-xl-7">
         <header>
           <h1 class="article-title"><%= article.title %></h1>
         </header>
-        <main class="article-body" id="article-body">
-          <%- article.content.body.html %>
-        </main>
+        <main class="article-body" id="article-body">Loading article</main>
       </div>
     </div>
     <script>
-     window.BODY_JSON = '<%- JSON.stringify(article.content.body.object) %>'
+     window.__ARTICLE__ = '<%- JSON.stringify(article) %>'
      window.__INITIAL_STATE__ = '<%- JSON.stringify(state) %>'
     </script>
     <script src="/static/dist/annotate.js"></script>

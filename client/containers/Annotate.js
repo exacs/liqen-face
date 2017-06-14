@@ -7,6 +7,9 @@ import Selector from '../components/annotator-drawer/selector'
 import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation, createLiqen } from '../actions/index'
 
+const article = JSON.parse(window.__ARTICLE__)
+console.log(article)
+
 export function Annotate (
   {
     question,
@@ -18,28 +21,29 @@ export function Annotate (
   }
 ) {
   return (
-    <div className='container mt-4'>
-      <div className='row'>
-        <aside className='hidden-md-down col-lg-4 flex-last'>
-          <LiqenCreator
-            question={question}
-            answer={answer}
-            onSubmit={onCreateLiqen}
+    <div className='row'>
+      <aside className='hidden-md-down col-lg-4 flex-last'>
+        <LiqenCreator
+          question={question}
+          answer={answer}
+          onSubmit={onCreateLiqen}
+        />
+        <Selector
+          annotations={annotations}
+          onSelect={(e) => console.log(e)}
+        />
+      </aside>
+      <div className='col-lg-8 col-xl-7'>
+        <header>
+          <h1 className="article-title">{article.title}</h1>
+        </header>
+        <main className='article-body'>
+          <Article
+            body={article.content.body.object}
+            tags={tags}
+            onCreateAnnotation={onCreateAnnotation}
           />
-          <Selector
-            annotations={annotations}
-            onSelect={(e) => console.log(e)}
-          />
-        </aside>
-        <div className='col-lg-8 col-xl-7'>
-          <main className='article-body'>
-            <Article
-              body={JSON.parse(window.BODY_JSON)}
-              tags={tags}
-              onCreateAnnotation={onCreateAnnotation}
-            />
-          </main>
-        </div>
+        </main>
       </div>
     </div>
   )
