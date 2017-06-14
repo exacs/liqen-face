@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import zipWith from 'lodash/fp/zipWith'
+import fetch from 'isomorphic-fetch'
 
 import Article from '../components/annotator/article'
 import Selector from '../components/annotator-drawer/selector'
@@ -8,9 +9,27 @@ import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation, createLiqen } from '../actions/index'
 
 const article = JSON.parse(window.__ARTICLE__)
-console.log(article)
 
 export class Annotate extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      articleBody: {
+        name: 'div',
+        attrs: {},
+        children: []
+      }
+    }
+  }
+
+  componentDidMount () {
+    fetch(`/parseArticle?uri=${article.source.uri}`)
+      .then(response => response.json())
+      .then(obj => {
+        this.setState({articleBody: obj.body.object})
+      })
+  }
+
   render () {
     const {
       question,
@@ -40,7 +59,7 @@ export class Annotate extends React.Component {
           </header>
           <main className='article-body'>
             <Article
-              body={article.content.body.object}
+              body={this.state.articleBody}
               tags={tags}
               onCreateAnnotation={onCreateAnnotation}
             />
