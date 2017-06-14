@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
+import { AppContainer } from 'react-hot-loader'
 
 import reducer from './reducers/index'
 import callAPI from './middlewares/call-api'
@@ -16,9 +17,11 @@ const store = createStore(
 
 const render = Component => {
   ReactDOM.render(
-    <Provider store={store}>
-      <Component />
-    </Provider>,
+    <AppContainer>
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    </AppContainer>,
     document.getElementById('react-root')
   )
 }
