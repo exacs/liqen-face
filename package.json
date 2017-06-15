@@ -12,7 +12,9 @@
     "build:dashboard": "babel dashboard -d lib/dashboard --presets es2015,react",
     "build:client": "webpack -p",
     "start": "node lib/server/index.js",
-    "test": "eslint client server dashboard"
+    "test": "npm run test:lint && npm run test:jest",
+    "test:lint": "eslint client server dashboard",
+    "test:jest": "jest"
   },
   "repository": {
     "type": "git",
@@ -66,6 +68,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-standard": "^3.0.1",
+    "jest": "^20.0.4",
     "nodemon": "^1.11.0",
     "react-hot-loader": "next",
     "rimraf": "^2.6.1",
