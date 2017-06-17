@@ -12,7 +12,8 @@
     "build:dashboard": "babel dashboard -d lib/dashboard --presets es2015,react",
     "build:client": "webpack -p",
     "start": "node lib/server/index.js",
-    "test": "npm run test:lint && npm run test:jest",
+    "test": "npm run test:lint && npm run test:jest --coverage | coveralls",
+    "test:nocov": "npm run test:lint && npm run test:jest",
     "test:lint": "eslint client server dashboard",
     "test:jest": "jest"
   },
@@ -61,6 +62,7 @@
   },
   "devDependencies": {
     "babel-preset-env": "^1.5.0",
+    "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.0",
     "eslint-plugin-import": "^2.2.0",
