@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import zip from 'lodash/zipWith'
 import split from './lib/split'
+import childrenToString from './lib/childrenToString'
 
 /**
  * Highlight a text and handles the highlighting action
@@ -154,24 +155,6 @@ export default class Highlighter extends React.Component {
         }
       </span>
     )
-  }
-}
-
-function childrenToString (e, flatten = false) {
-  if (React.Children.count(e) > 1) {
-    const arr = React.Children.toArray(e)
-
-    if (flatten) {
-      return arr.map(e => childrenToString(e, true)).join('')
-    } else {
-      return arr.map(e => childrenToString(e, true))
-    }
-  } else if (typeof e === 'string') {
-    return e
-  } else if (e.type && e.props && e.props.children) {
-    return childrenToString(e.props.children, true)
-  } else {
-    return 'You are passing something not valid'
   }
 }
 
