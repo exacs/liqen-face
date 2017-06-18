@@ -24,13 +24,13 @@ function convertObjectToReact (obj, key) {
   }
 }
 
-const EncapsulatedArticle = ({ onCreateAnnotation, tags }) => (
+const EncapsulatedArticle = ({ onCreateAnnotation, annotations, tags }) => (
   <div>
     {
       JSON.parse(window.BODY_JSON).children.map((child, i) => (
         <Annotator
           key={i}
-          annotations={[]}
+          annotations={annotations}
           tags={tags}
           onCreateAnnotation={onCreateAnnotation}
         >
@@ -66,6 +66,7 @@ export function Annotate (
         <div className='col-lg-8 col-xl-7'>
           <main className='article-body'>
             <EncapsulatedArticle
+              annotations={annotations}
               tags={tags}
               onCreateAnnotation={onCreateAnnotation} />
           </main>
