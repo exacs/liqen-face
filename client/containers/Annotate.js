@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import zipWith from 'lodash/fp/zipWith'
 
 import Annotator from '../components/annotator'
-import Selector from '../components/annotator-drawer/selector'
 import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation, createLiqen } from '../actions/index'
 
@@ -59,9 +58,6 @@ export function Annotate (
             question={question}
             answer={answer}
             onSubmit={onCreateLiqen} />
-          <Selector
-            annotations={annotations}
-            onSelect={(e) => console.log(e) }/>
         </aside>
         <div className='col-lg-8 col-xl-7'>
           <main className='article-body'>
