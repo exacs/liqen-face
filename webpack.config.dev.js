@@ -9,7 +9,7 @@ module.exports = {
 
   entry: {
     dashboard: ['webpack-hot-middleware/client', './dashboard'],
-    annotate: ['webpack-hot-middleware/client', './annotate']
+    annotate: ['webpack-hot-middleware/client', 'react-hot-loader/patch', './annotate']
   },
 
   output: {
@@ -45,5 +45,11 @@ module.exports = {
       NODE_ENV: 'development',
       DEBUG: true
     })
-  ]
+  ],
+
+  devServer: {
+    hot: true,
+    contentBase: path.resolve(__dirname, 'public/dist'),
+    publicPath: '/static/dist'
+  }
 }

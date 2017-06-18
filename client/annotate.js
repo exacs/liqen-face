@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
+import { AppContainer } from 'react-hot-loader'
 
 import reducer from './reducers/index'
 import callAPI from './middlewares/call-api'
@@ -14,9 +15,19 @@ const store = createStore(
   composeEnhancers(applyMiddleware(callAPI))
 )
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Annotate />
-  </Provider>,
-  document.getElementById('react-root')
-)
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    </AppContainer>,
+    document.getElementById('react-root')
+  )
+}
+
+render(Annotate)
+
+if (module.hot) {
+  module.hot.accept('./containers/Annotate', () => render(Annotate))
+}
