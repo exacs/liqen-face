@@ -19,8 +19,8 @@ const Selector = ({ list, selected, onSelect }) => (
         margin: 0
       }}
     >
-      {list.map(obj => (
-         <li key={obj.id}>
+      {list.map((obj, i) => (
+         <li key={i}>
            <button
              style={{
                background: 'none',
@@ -28,13 +28,13 @@ const Selector = ({ list, selected, onSelect }) => (
                fontFamily: 'sans-serif',
                fontSize: '24px',
                fontWeight: 'bold',
-               color: selected && selected.id === obj.id ? 'green' : '#CCC',
+               color: selected && selected === obj ? 'green' : '#CCC',
                outline: 'none',
                cursor: 'pointer'
              }}
              onClick={() => onSelect(obj)}
            >
-             *
+             #
            </button>
          </li>
        ))}

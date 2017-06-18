@@ -14,6 +14,9 @@ import PropTypes from 'prop-types'
 
 import Highlighter from './highlighter'
 import TaggerTooltip from './tagger-tooltip'
+import Selector from './selector'
+
+import childrenToString from './lib/childrenToString'
 
 export default class Annotator extends React.Component {
   constructor (props) {
@@ -68,14 +71,24 @@ export default class Annotator extends React.Component {
   }
 
   render () {
-    const selectedTag =
-      this.state.selectedAnnotation && this.state.selectedAnnotation.tag
+    const text = childrenToString(this.props.children).join('')
+
+    const annotations = this.props.annotations.filter(
+      ({target: {prefix, exact, suffix}}) => prefix + exact + suffix === text
+    )
 
     const selectedFragment =
       this.state.selectedAnnotation && this.state.selectedAnnotation.target
 
     return (
-      <div>
+      <div style={{position: 'relative'}}>
+        <div style={{position: 'absolute', left: '-30px'}}>
+          <Selector
+            list={annotations}
+            selected={this.state.selectedAnnotation}
+            onSelect={(annotation) => this.handleSelectAnnotation(annotation)}
+          />
+        </div>
         <div ref={node => (this.paragraph = node)}>
           <Highlighter
             onHighlight={(fragment, range) =>
@@ -87,10 +100,9 @@ export default class Annotator extends React.Component {
           </Highlighter>
         </div>
         <div ref={node => (this.tooltip = node)}>
-          {(selectedTag || this.state.newAnnotation.target) &&
+          {this.state.newAnnotation.target &&
            <TaggerTooltip
              list={this.props.tags}
-             selected={selectedTag}
              position={this.state.newAnnotation.range}
              onSelect={tag => this.handleSelectTag(tag)}
              onUnselect={() => this.handleUnselectTag()}
