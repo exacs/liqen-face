@@ -1,78 +1,73 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import zipWith from 'lodash/fp/zipWith'
+import fetch from 'isomorphic-fetch'
 
-import Annotator from '../components/annotator'
+import Article from '../components/annotator/article'
 import Selector from '../components/annotator-drawer/selector'
 import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation, createLiqen } from '../actions/index'
 
-// const question = JSON.parse(window.QUESTION)
-// const tags = question
+const article = JSON.parse(window.__ARTICLE__)
 
-function convertObjectToReact (obj, key) {
-  if (typeof obj === 'string') {
-    return obj
-  } else {
-    const children = obj.children.map((item, i) => convertObjectToReact(item, i))
-
-    if (children.length === 1) {
-      return React.createElement(obj.name, Object.assign({key}, obj.attrs), children[0])
-    } else {
-      return React.createElement(obj.name, Object.assign({key}, obj.attrs), children)
+export class Annotate extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      articleBody: {
+        name: 'div',
+        attrs: {},
+        children: []
+      }
     }
   }
-}
 
-const EncapsulatedArticle = ({ onCreateAnnotation, tags }) => (
-  <div>
-    {
-      JSON.parse(window.BODY_JSON).children.map((child, i) => (
-        <Annotator
-          key={i}
-          annotations={[]}
-          tags={tags}
-          onCreateAnnotation={onCreateAnnotation}
-        >
-          {convertObjectToReact(child)}
-        </Annotator>
-      ))
-    }
-  </div>
-)
-
-export function Annotate (
-  {
-    question,
-    answer,
-    annotations,
-    tags,
-    onCreateAnnotation,
-    onCreateLiqen
+  componentDidMount () {
+    fetch(`/parseArticle?uri=${article.source.uri}`)
+      .then(response => response.json())
+      .then(obj => {
+        this.setState({articleBody: obj.body.object})
+      })
   }
-) {
-  return (
-    <div className='container mt-4'>
+
+  render () {
+    const {
+      question,
+      answer,
+      annotations,
+      tags,
+      onCreateAnnotation,
+      onCreateLiqen
+    } = this.props
+
+    return (
       <div className='row'>
         <aside className='hidden-md-down col-lg-4 flex-last'>
           <LiqenCreator
             question={question}
             answer={answer}
-            onSubmit={onCreateLiqen} />
+            onSubmit={onCreateLiqen}
+          />
           <Selector
             annotations={annotations}
-            onSelect={(e) => console.log(e) }/>
+            onSelect={(e) => console.log(e)}
+          />
         </aside>
         <div className='col-lg-8 col-xl-7'>
+          <header>
+            <h1 className="article-title">{article.title}</h1>
+          </header>
           <main className='article-body'>
-            <EncapsulatedArticle
+            <Article
+              body={this.state.articleBody}
               tags={tags}
-              onCreateAnnotation={onCreateAnnotation} />
+              onCreateAnnotation={onCreateAnnotation}
+            />
           </main>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const mapStateToAnswer = (state) => {
