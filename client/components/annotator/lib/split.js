@@ -47,8 +47,8 @@ function splitFragmentArray (fragment, array) {
       break
     }
   }
-
-  return [r, current]
+  r.push(current)
+  return r
 }
 
 // Fragment is a { prefix, suffix, exact }
