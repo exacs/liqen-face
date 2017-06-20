@@ -28,24 +28,13 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
     <div className='card'>
       <div className='card-block'>
         <h4 className='card-title'>{question}</h4>
-        {
-          !complete
-          ? (
-            <p className='card-text small'>
-              <span>Highlight </span>
-              {
-                tags.length === 1 ? tags : pluralize(tags)
-              }
-              <span> in the text to answer this question</span>
-            </p>
-          )
-          : (
-            <div>
-              <div className='card-text'>This is your Liqen answer</div>
-              <div className='card-text small'>Change it choosing other annotations</div>
-            </div>
-          )
-        }
+        <p className='card-text small'>
+          <span>Highlight </span>
+          {
+            tags.length === 1 ? tags : pluralize(tags)
+          }
+          <span> in the text to answer this question</span>
+        </p>
       </div>
       <div>
         <ul className='list-group list-group-flush'>
@@ -56,7 +45,17 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
                 key={i}
               >
                 <span className='badge badge-default'># {title}</span>
-                <blockquote className='w-100'>{exact}</blockquote>
+                <blockquote
+                  className='w-100'
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    height: '1.5em'
+                  }}
+                >
+                {exact}
+                </blockquote>
               </li>
             ))
           }
@@ -65,7 +64,7 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
           <button
             className="btn btn-outline-primary"
             disabled={!onSubmit}
-            onClick={() => onSubmit()}>Send Answer</button>
+            onClick={() => onSubmit()}>Send Liqen</button>
         </div>
       </div>
     </div>

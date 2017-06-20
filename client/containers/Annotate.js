@@ -43,7 +43,7 @@ export class Annotate extends React.Component {
     return (
       <div className='row'>
         <aside className='hidden-md-down col-lg-4 flex-last'>
-          <h3 className='h6 text-uppercase text-muted'>The Question</h3>
+          <h3 className='h6 text-uppercase text-muted'>Create your Liqen (your Answer)</h3>
           <LiqenCreator
             question={question}
             answer={answer}
