@@ -49,11 +49,22 @@ export class Annotate extends React.Component {
             answer={answer}
             onSubmit={onCreateLiqen}
           />
-          <h3 className='h6 text-uppercase text-muted'>Annotations</h3>
-          <Selector
-            annotations={annotations}
-            onSelect={(e) => console.log(e)}
-          />
+          <div className='card'>
+            <div className='card-header'>
+              <ul className="nav nav-pills card-header-pills">
+                <li className="nav-item">
+                  <a className="nav-link active" href="#">Annotations</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Liqens</a>
+                </li>
+              </ul>
+            </div>
+            <Selector
+              annotations={annotations}
+              onSelect={(e) => console.log(e)}
+            />
+          </div>
         </aside>
         <div className='col-lg-8 col-xl-7'>
           <header>

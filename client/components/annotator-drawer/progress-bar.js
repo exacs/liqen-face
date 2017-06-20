@@ -76,7 +76,7 @@ export default class ProgressBar extends React.Component {
 
   render () {
     return (
-      <div style={{ position: 'absolute', width: '100%', height: '1px', bottom: '0' }}>
+      <div style={{ position: 'absolute', width: '100%', height: '1px', bottom: '0', left: '0' }}>
         {this.state.showSlow && <SlowBar></SlowBar>}
         {this.state.showFast && <FastBar></FastBar>}
       </div>
