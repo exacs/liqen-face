@@ -5,17 +5,28 @@ import SelectableAnnotation from './selectable-annotation'
 export default function Selector ({ annotations, onSelect }) {
   return (
     <div>
-      {
-        annotations.map(annotation => (
-          <div key={annotation.ref}>
-            <SelectableAnnotation
-              tag={annotation.tag}
-              target={annotation.target}
-              pending={annotation.pending}
-              onSelect={() => onSelect(annotation)} />
-          </div>
-        ))
-      }
+      <div>
+        {
+          annotations.length > 0 && annotations.map(annotation => (
+            <div key={annotation.ref}>
+              <SelectableAnnotation
+                tag={annotation.tag}
+                target={annotation.target}
+                pending={annotation.pending}
+                onSelect={() => onSelect(annotation)} />
+            </div>
+          ))
+        }
+      </div>
+      <div>
+        {
+          annotations.length === 0 && (
+            <div>
+              Start highlighting and you will see the annotations here
+            </div>
+          )
+        }
+      </div>
     </div>
   )
 }
