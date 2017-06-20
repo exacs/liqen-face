@@ -4,7 +4,7 @@ import zipWith from 'lodash/fp/zipWith'
 import fetch from 'isomorphic-fetch'
 
 import Article from '../components/annotator/article'
-import Selector from '../components/annotator-drawer/selector'
+import AnnotationsList from '../components/annotator-drawer/annotations-list'
 import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation, createLiqen } from '../actions/index'
 
@@ -60,7 +60,7 @@ export class Annotate extends React.Component {
                 </li>
               </ul>
             </div>
-            <Selector
+            <AnnotationsList
               annotations={annotations}
               onSelect={(e) => console.log(e)}
             />
