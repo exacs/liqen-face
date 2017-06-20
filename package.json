@@ -12,7 +12,10 @@
     "build:dashboard": "babel dashboard -d lib/dashboard --presets es2015,react",
     "build:client": "webpack -p",
     "start": "node lib/server/index.js",
-    "test": "eslint client server dashboard"
+    "test": "npm run test:lint && npm run test:jest --coverage | coveralls",
+    "test:nocov": "npm run test:lint && npm run test:jest",
+    "test:lint": "eslint client server dashboard",
+    "test:jest": "jest"
   },
   "repository": {
     "type": "git",
@@ -59,6 +62,7 @@
     "webpack": "^2.3.3"
   },
   "devDependencies": {
+    "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.0",
     "eslint-plugin-import": "^2.2.0",
@@ -66,6 +70,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-standard": "^3.0.1",
+    "jest": "^20.0.4",
     "nodemon": "^1.11.0",
     "react-hot-loader": "next",
     "rimraf": "^2.6.1",
