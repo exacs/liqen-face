@@ -4,7 +4,7 @@ import zipWith from 'lodash/fp/zipWith'
 import fetch from 'isomorphic-fetch'
 
 import Article from '../components/annotator/article'
-import AnnotationsList from '../components/annotator-drawer/annotations-list'
+import MultiList from '../components/annotator-drawer/multi-list'
 import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation, createLiqen } from '../actions/index'
 
@@ -49,22 +49,10 @@ export class Annotate extends React.Component {
             answer={answer}
             onSubmit={onCreateLiqen}
           />
-          <div className='card'>
-            <div className='card-header'>
-              <ul className="nav nav-pills card-header-pills">
-                <li className="nav-item">
-                  <a className="nav-link active" href="#">Annotations</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Liqens</a>
-                </li>
-              </ul>
-            </div>
-            <AnnotationsList
-              annotations={annotations}
-              onSelect={(e) => console.log(e)}
-            />
-          </div>
+          <MultiList
+            annotations={annotations}
+            liqens={[]}
+          />
         </aside>
         <div className='col-lg-8 col-xl-7'>
           <header>
