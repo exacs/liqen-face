@@ -7,7 +7,6 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
           ? <mark><strike>{a.title}</strike></mark>
           : <mark>{a.title}</mark>
   )
-  const complete = answer.every(a => a.title && a.exact)
 
   const pluralize = (tags) => {
     const ret = []
