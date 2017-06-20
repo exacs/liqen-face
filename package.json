@@ -15,10 +15,12 @@
     "build:dashboard": "babel dashboard -d lib/dashboard --presets es2015,react",
     "build:client": "webpack -p",
     "start": "node lib/server/index.js",
-    "test": "npm run test:lint && npm run test:jest --coverage | coveralls",
+    "test": "npm run test:lint && npm run test:jest-cov && npm run ci:coveralls",
     "test:nocov": "npm run test:lint && npm run test:jest",
     "test:lint": "eslint client server dashboard",
-    "test:jest": "jest"
+    "test:jest": "jest",
+    "test:jest-cov": "jest --coverage",
+    "ci:coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
