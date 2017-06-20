@@ -61,7 +61,7 @@ export default function LiqenCreator ({ onSubmit, answer, question }) {
         </ul>
         <div className='card-block text-right'>
           <button
-            className="btn btn-outline-primary"
+            className="btn btn-primary"
             disabled={!onSubmit}
             onClick={() => onSubmit()}>Send Liqen</button>
         </div>

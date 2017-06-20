@@ -30,7 +30,7 @@ export default class MultiList extends React.Component {
           <ul className='nav nav-pills card-header-pills'>
             <li className='nav-item'>
               <a
-                className={'nav-link ' + (this.state.show === 'annotations' && 'active')}
+                className={'nav-link btn-sm ' + (this.state.show === 'annotations' && 'active')}
                 href='#'
                 onClick={() => this.handleChangeView('annotations')}
               >
@@ -39,7 +39,7 @@ export default class MultiList extends React.Component {
             </li>
             <li className='nav-item'>
               <a
-                className={'nav-link ' + (this.state.show === 'liqens' && 'active')}
+                className={'nav-link btn-sm ' + (this.state.show === 'liqens' && 'active')}
                 href='#'
                 onClick={() => this.handleChangeView('liqens')}
               >
