@@ -10,7 +10,19 @@ export default function LiqensList ({ liqens }) {
             className='list-group-item'
             key={liqen.ref}
           >
-            Liqen
+            <div className='text-right w-100'>
+              <small>Created by you</small>
+            </div>
+            <div className='mb-1'>
+              {
+                liqen.answer.map(a => (
+                  <div>
+                    <span className='badge badge-default'># {a.tag.title}</span>
+                    <div ref={a.ref}>{a.target.exact}</div>
+                  </div>
+                ))
+              }
+            </div>
           </div>
         ))
       }

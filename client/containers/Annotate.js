@@ -35,6 +35,7 @@ export class Annotate extends React.Component {
       question,
       answer,
       annotations,
+      liqens,
       tags,
       onCreateAnnotation,
       onCreateLiqen
@@ -51,7 +52,7 @@ export class Annotate extends React.Component {
           />
           <MultiList
             annotations={annotations}
-            liqens={[]}
+            liqens={liqens}
           />
         </aside>
         <div className='col-lg-8 col-xl-7'>
@@ -108,10 +109,35 @@ const mapStateToAnnotations = (state) => {
   return ret
 }
 
+const mapStateToLiqens = (state) => {
+  const ret = []
+
+  for (let ref in state.liqens) {
+    const {answer, pending} = state.liqens[ref]
+
+    ret.push({
+      answer: answer.map(a => {
+        const {tag, target} = state.annotations[a]
+
+        return {
+          target,
+          ref: a,
+          tag: state.tags[tag]
+        }
+      }),
+      ref,
+      pending
+    })
+  }
+
+  return ret
+}
+
 const mapStateToProps = (state) => ({
   question: state.question.title,
   answer: mapStateToAnswer(state),
   annotations: mapStateToAnnotations(state),
+  liqens: mapStateToLiqens(state),
   tags: state.question.answer.map(
     ({tag}) => ({ref: tag, title: state.tags[tag].title})
   ),
