@@ -27,6 +27,11 @@ if (process.env.NODE_ENV === 'development') {
 
 app.set('views', path.join(process.cwd(), 'views'))
 app.set('view engine', 'ejs')
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz'
+  res.set('Content-Encoding', 'gzip')
+  next()
+})
 
 app.use('/static', express.static('public'))
 

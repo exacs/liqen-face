@@ -1,10 +1,13 @@
 {
   "name": "liqen-face",
   "version": "0.3.1",
+  "engines": {
+    "node": "7.x"
+  },
   "description": "Web application for Liqen (a.k.a. the Frontend)",
   "main": "server/index.js",
   "scripts": {
-    "postinstall": "npm run build",
+    "heroku-postbuild": "npm run build",
     "clean": "rimraf lib public/dist",
     "start:dev": "NODE_ENV=development nodemon server/index.js --ignore dashboard/ --ignore client/ --exec babel-node --presets env,react",
     "build": "npm run build:server && npm run build:client",
@@ -40,6 +43,7 @@
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.17.1",
+    "compression-webpack-plugin": "^0.4.0",
     "cookies": "^0.7.0",
     "cookies-js": "^1.2.3",
     "css-loader": "^0.28.0",
@@ -53,6 +57,7 @@
     "node-sass": "^4.5.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-hot-loader": "next",
     "react-redux": "^5.0.5",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
@@ -72,7 +77,6 @@
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^20.0.4",
     "nodemon": "^1.11.0",
-    "react-hot-loader": "next",
     "rimraf": "^2.6.1",
     "style-loader": "^0.16.1",
     "webpack-dev-middleware": "^1.10.1",
