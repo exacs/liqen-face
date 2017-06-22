@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 
@@ -46,6 +47,10 @@ module.exports = {
       asset: '[path].gz[query]',
       threshold: 10240,
       minRatio: 0.8
+    }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'production',
+      LIQEN_API_URI: process.env.LIQEN_API_URI
     })
   ]
 }
