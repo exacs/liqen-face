@@ -3552,9 +3552,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-liqen-scrapper@^2.0.2-0:
-  version "2.0.2-0"
-  resolved "https://registry.yarnpkg.com/liqen-scrapper/-/liqen-scrapper-2.0.2-0.tgz#01b73f878d38793b4e58983f4e864b263dea7a47"
+liqen-scrapper@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/liqen-scrapper/-/liqen-scrapper-2.1.0.tgz#fad36cc1a022ab7e46b29ee57371b90c1b0e98f0"
   dependencies:
     cheerio "^0.22.0"
     date-fns "^1.27.2"
