@@ -11,7 +11,7 @@ import Annotate from './containers/Annotate'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   reducer,
-  JSON.parse(window.__INITIAL_STATE__),
+  window.__INITIAL_STATE__,
   composeEnhancers(applyMiddleware(callAPI))
 )
 

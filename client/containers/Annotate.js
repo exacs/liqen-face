@@ -8,7 +8,7 @@ import MultiList from '../components/annotator-drawer/multi-list'
 import LiqenCreator from '../components/annotator-drawer/liqen-creator'
 import { createAnnotation, createLiqen } from '../actions/index'
 
-const article = JSON.parse(window.__ARTICLE__)
+const article = window.__ARTICLE__
 
 export class Annotate extends React.Component {
   constructor (props) {
