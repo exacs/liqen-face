@@ -119,6 +119,7 @@ router.get('/annotate', checkSession, async function (req, res, next) {
 
     const state = {
       question,
+      article,
       tags,
       annotations: {},
       liqens: {},

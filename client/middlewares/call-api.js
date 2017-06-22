@@ -35,7 +35,7 @@ export default store => next => action => {
     case ActionType.CREATE_ANNOTATION:
       const tag = callAPI.annotation.tag
       payload = {
-        article_id: 1,
+        article_id: store.getState().article.id,
         target: {
           type: 'TextQuoteSelector',
           prefix: callAPI.annotation.target.prefix,
@@ -50,7 +50,7 @@ export default store => next => action => {
 
     case ActionType.CREATE_LIQEN:
       payload = {
-        article_id: 1,
+        question_id: store.getState().question.id,
         annotations: store.getState().newLiqen.answer.map(
           a => store.getState().annotations[a].id
         )

@@ -12,6 +12,10 @@ const initialState = {
       }
     ]
   },
+  article: {
+    id: 100,
+    title: 'Title of the article'
+  },
   annotations: {
     a1: {
       id: 908,
@@ -51,6 +55,7 @@ const initialState = {
 export default function reducer (state = initialState, action = {}) {
   return {
     question: state.question,
+    article: state.article,
     annotations: annotationReducer(state.annotations, action),
     liqens: liqenReducer(state.liqens, action, state),
     tags: state.tags,
