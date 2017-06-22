@@ -13,10 +13,14 @@ export default store => next => action => {
   }
 
   const token = cookies.get('access_token')
-  let core = liqen(token)
+  const options = {
+    apiURI: process.env.LIQEN_API_URI
+  }
+
+  let core = liqen(token, options)
 
   if (process.env.NODE_ENV === 'development') {
-    core = fakeLiqen(token)
+    core = fakeLiqen(token, options)
   }
 
   // Middleware starts here

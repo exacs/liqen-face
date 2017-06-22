@@ -43,11 +43,14 @@ export function login (req, res, next) {
 export const setLiqenCore = core => (req, res, next) => {
   const cookies = new Cookies(req, res)
   const accessToken = cookies.get('access_token')
+  const options = {
+    apiURI: process.env.LIQEN_API_URI
+  }
 
   if (accessToken) {
-    req.core = core(accessToken)
+    req.core = core(accessToken, options)
   } else {
-    req.core = core()
+    req.core = core('', options)
   }
   next()
 }
