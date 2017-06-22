@@ -44,18 +44,12 @@ class ArticleList extends React.Component {
       <Article key={id}
         id={id}
         title={title}
-        link={source.uri} />
+        link={`/annotate?question=1&article=${id}`} />
     )
 
     return (
       <div>
-        <Question title='Describa el flujo migratorio de talento en el mundo' />
-        <h3 className='h6 my-4 text-muted'>
-          Artículos propuestos para responder a la pregunta
-        </h3>
-        <main>
-          {articles}
-        </main>
+        {articles}
       </div>
     )
   }

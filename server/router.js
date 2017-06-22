@@ -10,7 +10,15 @@ const router = express.Router()
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/', checkSession, (req, res, next) => {
-  res.render('dashboard')
+  console.log('Calling core.questions.show')
+  req.core.questions.show(1)
+    .then(question => {
+      res.render('dashboard', {question})
+    })
+    .catch(e => {
+      console.log('Call failed. Showing error ', e)
+      res.redirect('/login')
+    })
 })
 
 router.get('/parseArticle', (req, res, next) => {
