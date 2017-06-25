@@ -9,6 +9,7 @@ module.exports = {
 
   entry: {
     dashboard: ['webpack-hot-middleware/client', './dashboard'],
+    annotate: ['webpack-hot-middleware/client', 'react-hot-loader/patch', './annotate']
   },
 
   output: {
@@ -39,6 +40,16 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
-  ]
+    new webpack.NamedModulesPlugin(),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      DEBUG: true
+    })
+  ],
+
+  devServer: {
+    hot: true,
+    contentBase: path.resolve(__dirname, 'public/dist'),
+    publicPath: '/static/dist'
+  }
 }
