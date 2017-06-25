@@ -1,5 +1,4 @@
 import React from 'react'
-import Question from './question'
 import Article from './article'
 import liqen from 'liqen'
 import fakeLiqen from '../../server/local-liqen'
