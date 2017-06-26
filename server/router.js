@@ -118,18 +118,51 @@ router.get('/annotate', checkSession, async function (req, res, next) {
     }
   }
 
+  // Take the annotations
+  async function getAnnotations () {
+    try {
+      const list = await req.core.annotations.index({article_id: articleId})
+
+      const annotations = await Promise.all(list.map(async ({id, author, article_id}) => {
+        const annotation = await req.core.annotations.show(id)
+        return annotation
+      }))
+
+      const annotations2 = {}
+
+      for (let annotation of annotations) {
+        annotations2[annotation.id] = {
+          tag: annotation.tags[0].id,
+          target: {
+            prefix: annotation.target.prefix,
+            exact: annotation.target.exact,
+            suffix: annotation.target.suffix
+          },
+          checked: false,
+          pending: false
+        }
+      }
+
+      return annotations2
+    } catch (e) {
+      console.log('error 3')
+      console.log(e)
+    }
+  }
+
   // Paralelize
   try {
-    const [{question, tags}, article] = await Promise.all([
+    const [{question, tags}, article, annotations] = await Promise.all([
       getQuestionAndTags(),
-      getArticle()
+      getArticle(),
+      getAnnotations()
     ])
 
     const state = {
       question,
       article,
       tags,
-      annotations: {},
+      annotations,
       liqens: {},
       newLiqen: {
         answer: question.answer.map(a => null)
