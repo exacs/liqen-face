@@ -1,3 +1,10 @@
+/*
+Liqen Colors
+
+Primary color:   #c6ef9e (Liqen Green for white background)
+Secondary color: #3a5665 (Liqen Dark grey)
+Tertiary color:  #78fd07 (Liqen Green for dark background)
+*/
 a {
   color: #3a5665;
 }
@@ -8,21 +15,51 @@ a:hover {
 
 mark {
   padding-left: 0;
-  padding-right: .1em;
+  padding-right: 0;
+  background: #c6ef9e;
 }
 
+/* Buttons */
 .btn-primary {
   color: #3a5665;
-  background-color: #78fd07;
-  border-color: #78fd07;
+  background-color: #c6ef9e;
+  border-color: #c6ef9e;
 }
 
 .btn-primary:hover {
   color: #3a5665;
+  background-color: #c6ef9e;
+  border-color: #c6ef9e;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: #c6ef9e;
+  border-color: #c6ef9e;
+}
+
+.btn-tertiary {
+  color: #3a5665;
   background-color: #78fd07;
   border-color: #78fd07;
 }
 
+.btn-tertiary:hover {
+  color: #3a5665;
+  background-color: #78fd07;
+  border-color: #78fd07;
+}
+
+.btn-tertiary.disabled, .btn-tertiary:disabled {
+  background-color: #78fd07;
+  border-color: #78fd07;
+}
+
+/* Card */
+.card {
+  margin-bottom: 3em;
+}
+
+/* Navbar */
 .navbar .navbar-brand {
   font-weight: bold;
 }
@@ -41,18 +78,68 @@ mark {
   color: #78fd07;
 }
 
+/* Navs */
+.nav-link {
+  padding: .25rem .5rem
+}
+
+.nav-pills .nav-item .nav-link,
+.nav-pills .nav-link {
+  color: #666;
+}
+
+.nav-pills .nav-item.show .nav-link,
+.nav-pills .nav-link.active {
+  border-radius: 0;
+  color: #3a5665;
+  cursor: default;
+  background: none;
+  border-bottom: 2px solid #3a5665;
+}
+
+/* Jumbotron */
 .jumbotron {
   border-radius: 0;
 }
 
-.card {
-  margin-bottom: 3em;
+/* Utilities / colors */
+.text-primary {
+  color: #c6ef9e !important;
+}
+
+.text-secondary {
+  color: #3a5665 !important;
+}
+
+.text-tertiary {
+  color: #78fd07 !important;
 }
 
 .bg-primary {
+  background-color: #c6ef9e !important;
+}
+
+.bg-secondary {
   background-color: #3a5665 !important;
+}
+
+.bg-tertiary {
+  background-color: #78fd07 !important;
 }
 
 .bg-primary a {
   color: #78fd07;
+}
+
+/* Liqen specific */
+.article-title {
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.article-body {
+  font-size: 20px;
+  font-family: "Georgia",serif;
+  line-height: 1.5;
+  letter-spacing: 0.014em;
 }

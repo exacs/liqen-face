@@ -1,6 +1,6 @@
 import React from 'react'
 
-function getColorFromId(id) {
+function getColorFromId (id) {
   const hue = (id * 97) % 360
   return `hsl(${hue}, 32%, 68%)`
 }
