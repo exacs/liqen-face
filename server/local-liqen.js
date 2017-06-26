@@ -145,6 +145,23 @@ const localLiqen = token => ({
   },
 
   liqens: {
+    index () {
+      return Promise.resolve([
+        {question_id: 1, id: 97}
+      ])
+    },
+
+    show () {
+      return Promise.resolve({
+        id: 97,
+        question_id: 1,
+        annotations: [
+          {id: 31},
+          {id: 2}
+        ]
+      })
+    },
+
     create (obj) {
       return Promise.resolve(Object.assign({
         id: Math.floor(Math.random() * 1000)
