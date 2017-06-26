@@ -129,7 +129,6 @@ router.get('/annotate', checkSession, async function (req, res, next) {
       }))
 
       const annotations2 = {}
-      console.log(annotations)
 
       for (let annotation of annotations) {
         if (annotation.tags.length > 0) {
