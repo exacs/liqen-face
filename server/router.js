@@ -129,17 +129,20 @@ router.get('/annotate', checkSession, async function (req, res, next) {
       }))
 
       const annotations2 = {}
+      console.log(annotations)
 
       for (let annotation of annotations) {
-        annotations2[annotation.id] = {
-          tag: annotation.tags[0].id,
-          target: {
-            prefix: annotation.target.prefix,
-            exact: annotation.target.exact,
-            suffix: annotation.target.suffix
-          },
-          checked: false,
-          pending: false
+        if (annotation.tags.length > 0) {
+          annotations2[annotation.id] = {
+            tag: annotation.tags[0].id,
+            target: {
+              prefix: annotation.target.prefix,
+              exact: annotation.target.exact,
+              suffix: annotation.target.suffix
+            },
+            checked: false,
+            pending: false
+          }
         }
       }
 
