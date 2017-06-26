@@ -150,12 +150,38 @@ router.get('/annotate', checkSession, async function (req, res, next) {
     }
   }
 
+  async function getLiqens () {
+    try {
+      const list = await req.core.liqens.index({question_id: questionId})
+
+      const liqens = await Promise.all(list.map(async ({question_id, id}) => {
+        const liqen = await req.core.liqens.show(id)
+        return liqen
+      }))
+
+      const liqens2 = {}
+
+      for (let liqen of liqens) {
+        liqens2[liqen.id] = {
+          answer: liqen.annotations.map(a => a.id),
+          pending: false
+        }
+      }
+
+      return liqens2
+    } catch (e) {
+      console.log('error 4')
+      console.log(e)
+    }
+  }
+
   // Paralelize
   try {
-    const [{question, tags}, article, annotations] = await Promise.all([
+    const [{question, tags}, article, annotations, liqens] = await Promise.all([
       getQuestionAndTags(),
       getArticle(),
-      getAnnotations()
+      getAnnotations(),
+      getLiqens()
     ])
 
     const state = {
@@ -163,7 +189,7 @@ router.get('/annotate', checkSession, async function (req, res, next) {
       article,
       tags,
       annotations,
-      liqens: {},
+      liqens,
       newLiqen: {
         answer: question.answer.map(a => null)
       }
